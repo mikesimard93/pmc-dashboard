@@ -19,11 +19,11 @@ export const grossProductData = [{
     moyenne: 22.97,
     actuel: 22.97,
 }, {
-    state: 'Antoine M',
+    state: 'Anthony',
     moyenne: 3.26,
     actuel: 3.26,
 }, {
-    state: 'Antoine L',
+    state: 'Antoine',
     moyenne: 14.17,
     actuel: 14.17,
 }, {
