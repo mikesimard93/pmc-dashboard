@@ -28,30 +28,27 @@ function App() {
     <div className="App">
         <Box >
             <Box >
-                <img src={Antoine} align='left' height="150"/>
-                <img src={Etienne} align='left' height="150"/>
-                <img src={Mike} align='left' height="150"/>
-                <img src={Nic} align='left' height="150"/>
-                <img src={Raph} align='left' height="150"/>
-                <img src={Sam} align='left' height="150"/>
-                <img src={Santi} align='left' height="150"/>
-                <img src={Simon} align='left' height="150"/>
-                <img src={William} align='left' height="150"/>
-                <img src={AntoineM} align='left' height="150"/>
+                <img src={Antoine} align='left' height="100"/>
+                <img src={Etienne} align='left' height="100"/>
+                <img src={Mike} align='left' height="100"/>
+                <img src={Nic} align='left' height="100"/>
+                <img src={Raph} align='left' height="100"/>
+                <img src={Sam} align='left' height="100"/>
+                <img src={Santi} align='left' height="100"/>
+                <img src={Simon} align='left' height="100"/>
+                <img src={William} align='left' height="100"/>
+                <img src={AntoineM} align='left' height="100"/>
             </Box>
         </Box>
 
-        <Box pt={5} >
-            <Box><Typography variant="h5" component="h2">
+        <Box p={2.5}>
+            <Box><Typography align="left" variant="h5" component="h2">
                 TABLEAU DE BORD ZEUS
             </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography align="left" variant="h5" component="h2">
                     18 Janvier 2021
-                </Typography></Box>
-            <Box><img src={UdeS} align='left' height="100"/></Box>
-
-
-
+                </Typography>
+            </Box>
         </Box>
 
         <Grid container direction={'row'} spacing='5'>
@@ -77,7 +74,7 @@ function App() {
                 </Box>
                 <Box m={0} pt={4}>
                     <Paper elevation={4}>
-                        <Box p={3}>
+                        <Box p={2}>
                         <PieChartHours></PieChartHours>
                             </Box>
                     </Paper>

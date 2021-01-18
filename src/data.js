@@ -1,43 +1,43 @@
 export const grossProductData = [{
     state: 'Michael',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 37.77,
+    actuel: 37.77,
 }, {
     state: 'Simon',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 15.34,
+    actuel: 15.34,
 }, {
     state: 'Samuel',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 20.45,
+    actuel: 20.45,
 }, {
     state: 'Nicolas',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 20.98,
+    actuel: 20.98,
 }, {
     state: 'Santiago',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 22.97,
+    actuel: 22.97,
 }, {
     state: 'Antoine M',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 3.26,
+    actuel: 3.26,
 }, {
     state: 'Antoine L',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 14.17,
+    actuel: 14.17,
 }, {
     state: 'Raphael',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 9,
+    actuel: 9,
 }, {
     state: 'William',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 27.49,
+    actuel: 27.49,
 }, {
     state: 'Etienne',
-    moyenne: 423.721,
-    actuel: 476.851,
+    moyenne: 18.31,
+    actuel: 18.31,
 }];
 
 export const areas = [{
