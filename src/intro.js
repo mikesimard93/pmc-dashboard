@@ -34,11 +34,12 @@ export default function OutlinedCard() {
                     Resumé
                 </Typography>
                 <Typography variant="body2" align="left" component="p">
-                    Allo
+                    Première semaine concluante. Les modules sont bien repartis et les chanchements
+                    aux méthodes de gestion semblent pertinentes et efficaces. Quelques points:
                     <ul>
-                        <li>Coffee</li>
-                        <li>Tea</li>
-                        <li>Milk</li>
+                        <li>15 février -> Rover V0</li>
+                        <li>V0 du tableau de bord: sera amélioré de façon continue</li>
+                        <li>Nouvelle commandite de 5000$ confirmée</li>
                     </ul>
                 </Typography>
             </CardContent>

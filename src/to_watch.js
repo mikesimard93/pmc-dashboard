@@ -40,9 +40,10 @@ export default function OutlinedCard() {
                     à surveiller
                 </Typography>
                 <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                    <ul>
+                        <li>Échéancier serré -> Supervision des modules plus étroite suggérée</li>
+                        <li>Utilisation d'Asana de façon impeccable essentielle</li>
+                    </ul>
                 </Typography>
             </CardContent>
         </Card>

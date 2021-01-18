@@ -23,92 +23,84 @@ import UdeS from './Logo_Couleurs.png'; // with import
 import Box from '@material-ui/core/Box';
 
 function App() {
-  return (
+    return (
 
-    <div className="App">
-        <Box >
+        <div className="App">
             <Box >
-                <img src={Antoine} align='left' height="100"/>
-                <img src={Etienne} align='left' height="100"/>
-                <img src={Mike} align='left' height="100"/>
-                <img src={Nic} align='left' height="100"/>
-                <img src={Raph} align='left' height="100"/>
-                <img src={Sam} align='left' height="100"/>
-                <img src={Santi} align='left' height="100"/>
-                <img src={Simon} align='left' height="100"/>
-                <img src={William} align='left' height="100"/>
-                <img src={AntoineM} align='left' height="100"/>
+                <Box >
+                    <img src={Antoine} align='left' height="100"/>
+                    <img src={Etienne} align='left' height="100"/>
+                    <img src={Mike} align='left' height="100"/>
+                    <img src={Nic} align='left' height="100"/>
+                    <img src={Raph} align='left' height="100"/>
+                    <img src={Sam} align='left' height="100"/>
+                    <img src={Santi} align='left' height="100"/>
+                    <img src={Simon} align='left' height="100"/>
+                    <img src={William} align='left' height="100"/>
+                    <img src={AntoineM} align='left' height="100"/>
+                </Box>
             </Box>
-        </Box>
 
-        <Box p={2.5}>
-            <Box><Typography align="left" variant="h5" component="h2">
-                TABLEAU DE BORD ZEUS
-            </Typography>
-                <Typography align="left" variant="h5" component="h2">
-                    18 Janvier 2021
+            <Box p={2}>
+                <Box><Typography align="left" variant="h5" component="h2">
+                    TABLEAU DE BORD ZEUS
                 </Typography>
+                    <Typography align="left" variant="h5" component="h2">
+                        18 Janvier 2021
+                    </Typography>
+                </Box>
             </Box>
-        </Box>
 
-        <Grid container direction={'row'} spacing='5'>
-            <Grid item xs={3}>
-                <Box m={0} ml={4}>
-                    <Paper elevation={4}>
-                        <Intro></Intro>
-                    </Paper>
-                </Box>
-                <Box m={0} pt={4} ml={4}>
-                    <Paper elevation={4}>
-                        <TEST></TEST>
-                    </Paper>
-                </Box>
-            </Grid>
-            <Grid item xs={3}>
-                <Box m={0} >
-                    <Paper elevation={4}>
-                        <Box p={3}>
-                        <GaugePerformance></GaugePerformance>
-                            </Box>
-                    </Paper>
-                </Box>
-                <Box m={0} pt={4}>
-                    <Paper elevation={4}>
-                        <Box p={2}>
-                        <PieChartHours></PieChartHours>
-                            </Box>
-                    </Paper>
-                </Box>
-            </Grid>
-            <Grid item xs={6}>
+            <Box p={4}>
+            <Grid container direction={'row'} spacing='5'>
 
-                <Box mr={4}>
-                    <Paper elevation={4}>
-                        <Box p={4}>
-                            <Members></Members>
+                    <Grid item xs={3}>
+                        <Box m={0}>
+                            <Paper elevation={4}>
+                                <Intro></Intro>
+                            </Paper>
                         </Box>
-                    </Paper>
-                </Box>
+                    </Grid>
+
+                    <Grid item xs={3}>
+                        <Box m={0}>
+                            <Paper elevation={4}>
+                                <TEST></TEST>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
+
+                    <Grid item xs={3}>
+                        <Box m={0}>
+                            <Paper elevation={4}>
+                                <GaugePerformance></GaugePerformance>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
+
+                    <Grid item xs={3}>
+                        <Box m={0}>
+                            <Paper elevation={4}>
+                                <PieChartHours></PieChartHours>
+                            </Paper>
+                        </Box>
+                    </Grid>
             </Grid>
-        </Grid>
+            </Box>
 
-
-      {/*<header className="App-header">*/}
-      {/*  <img src={logo} className="App-logo" alt="logo" />*/}
-      {/*  <p>*/}
-      {/*    Edit <code>src/App.js</code> and save to reload.*/}
-      {/*  </p>*/}
-      {/*  <a*/}
-      {/*    className="App-link"*/}
-      {/*    href="https://reactjs.org"*/}
-      {/*    target="_blank"*/}
-      {/*    rel="noopener noreferrer"*/}
-      {/*  >*/}
-      {/*    Learn React*/}
-      {/*  </a>*/}
-      {/*</header>*/}
-    </div>
-  );
+            <Grid item xs={12}>
+            <Box m={4}>
+                <Paper elevation={4}>
+                    <Box p={4}>
+                        <Members></Members>
+                    </Box>
+                </Paper>
+            </Box>
+            </Grid>
+        </div>
+    );
 }
 
 export default App;

@@ -41,23 +41,23 @@ export const grossProductData = [{
 }];
 
 export const areas = [{
-    country: 'Propulsion',
-    area: 12
+    country: 'Présentation',
+    area: 14
 }, {
-    country: 'Puissance',
-    area: 7
+    country: 'Conception',
+    area: 55
 }, {
-    country: 'Controle',
-    area: 7
+    country: 'Gestion',
+    area: 11
 }, {
-    country: 'Bras',
-    area: 7
+    country: 'Rencontre',
+    area: 32
 }, {
-    country: 'Chassis',
-    area: 6
+    country: 'A.P.',
+    area: 8
 }, {
-    country: 'Science',
-    area: 5
+    country: 'Fabrication',
+    area: 1
 }];
 
 export const dataSource = [{
