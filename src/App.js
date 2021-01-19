@@ -58,7 +58,7 @@ function App() {
             <Box p={4}>
                 <Grid container alignItems="stretch" direction={'row'} spacing='5'>
 
-                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                    <Grid item xs={12} sm={12} md={3} lg={3}>
                         <Box m={0}>
                             <Paper height="100%"  elevation={4}>
                                 <Intro></Intro>
@@ -72,7 +72,7 @@ function App() {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                    <Grid item xs={12} sm={12} md={3} lg={3}>
                         <Box  m={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
@@ -86,7 +86,7 @@ function App() {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={6} md={3} lg={3}>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
@@ -100,7 +100,7 @@ function App() {
                     </Grid>
                 </Grid>
 
-                <Grid item xs={12} sm={6} md={3} lg={3}>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
                     <Box mt={4}>
                         <Paper elevation={4}>
                             <Box p={2}>
