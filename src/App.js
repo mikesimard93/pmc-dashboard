@@ -5,6 +5,7 @@ import PieChartHours from './pie_chart_hours'
 import TEST from './to_watch'
 import Intro from './intro'
 import GaugePerformance from './gauge'
+import FinancesGauge from './finance_gauge'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -64,9 +65,14 @@ function App() {
                                 <Intro></Intro>
                             </Paper>
                         </Box>
-                        <Box mt={4}>
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={3} lg={3}>
+                        <Box  m={0}>
                             <Paper elevation={4}>
-                                <TEST></TEST>
+                                <Box p={0}>
+                                    <TEST></TEST>
+                                </Box>
                             </Paper>
                         </Box>
                     </Grid>
@@ -85,6 +91,20 @@ function App() {
                         </Box>
                     </Grid>
 
+                    <Grid item xs={12} sm={12} md={3} lg={3}>
+                        <Box  m={0}>
+                            <Paper elevation={4}>
+                                <Box p={2}>
+                                    <Typography variant="h5" component="h2">
+                                        Finances
+                                    </Typography>
+                                    <FinancesGauge></FinancesGauge>
+                                </Box>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
+
 
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>
@@ -98,16 +118,17 @@ function App() {
                             </Paper>
                         </Box>
                     </Grid>
-                </Grid>
 
-                <Grid item xs={12} sm={12} md={12} lg={12}>
-                    <Box mt={4}>
-                        <Paper elevation={4}>
-                            <Box p={2}>
-                                <Members></Members>
-                            </Box>
-                        </Paper>
-                    </Box>
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <Box mt={0}>
+                            <Paper elevation={4}>
+                                <Box p={2}>
+                                    <Members></Members>
+                                </Box>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
                 </Grid>
 
             </Box>
