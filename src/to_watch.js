@@ -39,7 +39,7 @@ export default function OutlinedCard() {
                 <Typography className={classes.pos} color="textSecondary">
                     à surveiller
                 </Typography>
-                <Typography variant="body2" component="p">
+                <Typography variant="body2"  align="left" component="p">
                     <ul>
                         <li>Échéancier serré -> Supervision des modules plus étroite suggérée</li>
                         <li>Utilisation d'Asana de façon impeccable essentielle</li>

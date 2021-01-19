@@ -24,7 +24,7 @@ class PieChartHours extends React.Component {
                 id="pie"
                 dataSource={areas}
                 palette="Bright"
-                title="Heures vs Modules"
+
                 onPointClick={this.pointClickHandler}
                 onLegendClick={this.legendClickHandler}
             >

@@ -11,7 +11,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <p>
+
             <BarGauge
                 id="gauge"
                 startValue={0}
@@ -20,12 +20,7 @@ class App extends React.Component {
             >
                 <Label indent={20} format={format} customizeText={this.customizeText} />
                 <Export enabled={false} />
-                <Title text={"Ratio heures"}>
-                    <Font size={25} />
-                </Title>
             </BarGauge>
-                0 = Sous-estimation de la duree des taches
-            </p>
         );
     }
 
