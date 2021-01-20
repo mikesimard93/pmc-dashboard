@@ -4,22 +4,76 @@ import './App.css';
 
 let data = {
     name: 'Parent',
-    children: [{
+    children: [
+        {
+            name: 'Child Two',
+            textProps: {x: -25, y: 25},
+            children: [{
+                name: 'Child One'
+            }, {
+                name: 'Child Two',
+                children: [{
+                    name: 'Child One'
+                }, {
+                    name: 'Child Two'
+                }]
+            }]
+        },
+
+
+        {
+            name: 'Child Two',
+            textProps: {x: -25, y: 25},
+            children: [{
+                name: 'Child One'
+            }, {
+                name: 'Child Two',
+                children: [{
+                    name: 'Child One'
+                }, {
+                    name: 'Child Two'
+                }]
+            }]
+        },
+        {
+            name: 'Child Two',
+            textProps: {x: -25, y: 25},
+            children: [{
+                name: 'Child One'
+            }, {
+                name: 'Child Two',
+                children: [{
+                    name: 'Child One'
+                }, {
+                    name: 'Child Two'
+                }]
+            }]
+        },
+        {
         name: 'Banc de test fonctionnel',
         children: [{
             name: 'Child One',
             textProps: {x: -25, y: 25},
         }, {
-            name: 'Child Two',
+            name: 'Child Two: -5/5',
+            textProps: {x: -25, y: 25},
             children: [{
                 name: 'Child One',
+
+                textProps: {x: -25, y: 25},
                 children: [{
                     name: 'Child One',
-                    color: 'yellow'
+
+                    textProps: {x: -25, y: 25},
+                    color: 'yellow',
+
                 }, {
                     name: 'Child Two',
+                    textProps: {x: -25, y: 25},
                     children: [{
-                        name: 'Child One'
+                        name: 'Child One',
+
+                        textProps: {x: -25, y: 25},
                     }, {
                         name: 'Yellow',
                         pathProps: {className: 'yellow'},
@@ -29,11 +83,13 @@ let data = {
                     }]
                 }]
             }, {
-                name: 'Child Two'
+                name: 'Child Two',
+                textProps: {x: -25, y: 25},
             }]
-        }]
+        }],
     }, {
         name: 'Child Two',
+        textProps: {x: -25, y: 25},
         children: [{
             name: 'Child One'
         }, {
@@ -42,7 +98,21 @@ let data = {
                 name: 'Child One'
             }, {
                 name: 'Child Two'
-            }]
+            },
+                {
+                    name: 'Child Two',
+                    textProps: {x: -25, y: 25},
+                    children: [{
+                        name: 'Child One'
+                    }, {
+                        name: 'Child Two',
+                        children: [{
+                            name: 'Child One'
+                        }, {
+                            name: 'Child Two'
+                        }]
+                    }]
+                }]
         }]
     }]
 };
@@ -56,7 +126,7 @@ class MindMap extends React.Component {
             <Tree
                 data={data}
                 nodeRadius={30}
-                height={400}
+                height={800}
                 width={1500}/>
         );
     }
