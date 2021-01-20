@@ -5,6 +5,7 @@ import PieChartHours from './pie_chart_hours'
 import TEST from './to_watch'
 import Intro from './intro'
 import GaugePerformance from './gauge'
+import MindMap from './graph'
 import FinancesGauge from './finance_gauge'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -124,6 +125,16 @@ function App() {
                             <Paper elevation={4}>
                                 <Box p={2}>
                                     <Members></Members>
+                                </Box>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Box mt={0}>
+                            <Paper elevation={4}>
+                                <Box p={2}>
+                                    <MindMap></MindMap>
                                 </Box>
                             </Paper>
                         </Box>
