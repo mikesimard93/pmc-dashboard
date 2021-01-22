@@ -1,29 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import Members from './hours_members'
-import PieChartHours from './pie_chart_hours'
-import TEST from './to_watch'
-import Intro from './intro'
-import GaugePerformance from './gauge'
-import MindMap from './graph'
-import FinancesGauge from './finance_gauge'
+import Members from './data_vizualisation/hours_members'
+import PieChartHours from './data_vizualisation/pie_chart_hours'
+import TEST from './data_vizualisation/to_watch'
+import Intro from './data_vizualisation/intro'
+import GaugePerformance from './data_vizualisation/gauge'
+import MindMap from './data_vizualisation/graph'
+import FinancesGauge from './data_vizualisation/finance_gauge'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Avatar from './avatars'
-import Etienne from './etienne.jpg'; // with import
-import Antoine from './antoine.jpg'; // with import
-import Mike from './mike.jpg'; // with import
-import Nic from './nic.jpg'; // with import
-import William from './william.jpg'; // with import
-import Santi from './santiago.jpg'; // with import
-import Simon from './simon.jpg'; // with import
-import Sam from './sam.jpg'; // with import
-import Raph from './raph.jpg'; // with import
-import AntoineM from './AntoineM.png'; // with import
-import UdeS from './Logo_Couleurs.png'; // with import
 import Box from '@material-ui/core/Box';
 import React from "react";
+
+const asana = require('asana-api');
 
 function App() {
     return (
@@ -33,16 +22,16 @@ function App() {
             <Grid container direction={'row'}>
                 <Box >
                     <Box >
-                        <img src={Antoine} align='left' height="150"/>
-                        <img src={Etienne} align='left' height="150"/>
-                        <img src={Mike} align='left' height="150"/>
-                        <img src={Nic} align='left' height="150"/>
-                        <img src={Raph} align='left' height="150"/>
-                        <img src={Sam} align='left' height="150"/>
-                        <img src={Santi} align='left' height="150"/>
-                        <img src={Simon} align='left' height="150"/>
-                        <img src={William} align='left' height="150"/>
-                        <img src={AntoineM} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/AntoineM.png'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/antoine.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/etienne.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/mike.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/nic.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/raph.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/sam.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/santiago.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/simon.jpg'} align='left' height="150"/>
+                        <img src={process.env.PUBLIC_URL + './photos_membres/william.jpg'} align='left' height="150"/>
                     </Box>
                 </Box>
                 <Box p={2}>

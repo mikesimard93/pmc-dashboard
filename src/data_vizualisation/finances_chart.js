@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Chart, Series, CommonSeriesSettings, Legend, ValueAxis, Title, Export, Tooltip, Border } from 'devextreme-react/chart';
-import {dataSource} from './data.js';
+import {dataSource} from '../data/data.js';
 
 
 class Finances extends React.Component {

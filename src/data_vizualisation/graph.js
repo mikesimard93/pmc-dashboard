@@ -1,6 +1,6 @@
 import Tree from 'react-tree-graph';
 import React from "react";
-import './App.css';
+import '../App.css';
 
 let data = {
     name: 'Parent',

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Chart, Series, CommonSeriesSettings, Label, Format, Legend, Export } from 'devextreme-react/chart';
-import { grossProductData } from './data.js';
+import { grossProductData } from '../data/data.js';
 
 class Members extends React.Component {
 

@@ -8,7 +8,7 @@ import PieChart, {
     Export
 } from 'devextreme-react/pie-chart';
 
-import { areas } from './data.js';
+import { areas } from '../data/data.js';
 
 class PieChartHours extends React.Component {
     constructor(props) {
