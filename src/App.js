@@ -11,6 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import React from "react";
+import BackendTest from './backend/backend'
 
 const asana = require('asana-api');
 
@@ -132,6 +133,7 @@ function App() {
                 </Grid>
 
             </Box>
+            <BackendTest></BackendTest>
         </div>
     );
 }
