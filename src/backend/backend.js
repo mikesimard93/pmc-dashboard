@@ -4,7 +4,7 @@ var asana = require('asana-api');
 
 
 var client = asana.createClient({
-    apiKey: '1/130782075921760:ea95e018abbbc064e35274b2f6bc6cce'
+    apiKey: '1/130782075921760:ea95e018abbbc064e35274b2f6bc6cce' //My personal API key
 });
 
 client.users.list(function (err, users) {
