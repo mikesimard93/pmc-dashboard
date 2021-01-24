@@ -1,25 +1,41 @@
 import './App.css';
-import Members from './data_vizualisation/hours_members'
-import PieChartHours from './data_vizualisation/pie_chart_hours'
-import TEST from './data_vizualisation/to_watch'
-import Intro from './data_vizualisation/intro'
-import GaugePerformance from './data_vizualisation/gauge'
-import MindMap from './data_vizualisation/graph'
-import FinancesGauge from './data_vizualisation/finance_gauge'
+
+// General Components
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import React from "react";
+
+// Introduction Components
+import Members from './data_vizualisation/hours_members'
+import Intro from './data_vizualisation/intro'
+import ToWatch from './data_vizualisation/to_watch'
+
+// KPIs Components
+import GaugePerformance from './data_vizualisation/gauge'
+import FinancesGauge from './data_vizualisation/finance_gauge'
+import PieChartHours from './data_vizualisation/pie_chart_hours'
+import PieChartHoursModules from './data_vizualisation/pie_chart_modules_hours'
+
+// Graph Tree
+import MindMap from './data_vizualisation/graph'
+
+// Data Gathering
 import BackendTest from './backend/backend'
 
-const asana = require('asana-api');
+
+// Date Generation
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = dd + '/' + mm + '/' + yyyy;
+
 
 function App() {
     return (
-
         <div className="App">
-
             <Grid container direction={'row'}>
                 <Box >
                     <Box >
@@ -40,7 +56,7 @@ function App() {
                         TABLEAU DE BORD ZEUS
                     </Typography>
                         <Typography align="left" variant="h5" component="h2">
-                            18 Janvier 2021
+                            {today}
                         </Typography>
                     </Box>
                 </Box>
@@ -62,7 +78,7 @@ function App() {
                         <Box  m={0}>
                             <Paper elevation={4}>
                                 <Box p={0}>
-                                    <TEST></TEST>
+                                    <ToWatch></ToWatch>
                                 </Box>
                             </Paper>
                         </Box>
@@ -95,8 +111,6 @@ function App() {
                         </Box>
                     </Grid>
 
-
-
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>
                             <Paper elevation={4}>
@@ -104,8 +118,23 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Heures vs Type
                                     </Typography>
+                                    <PieChartHours></PieChartHours>
                                 </Box>
-                                <PieChartHours></PieChartHours>
+
+                            </Paper>
+                        </Box>
+                    </Grid>
+
+                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                        <Box m={0}>
+                            <Paper elevation={4}>
+                                <Box p={2}>
+                                    <Typography variant="h5" component="h2">
+                                        Heures vs Module
+                                    </Typography>
+                                    <PieChartHoursModules></PieChartHoursModules>
+                                </Box>
+
                             </Paper>
                         </Box>
                     </Grid>
@@ -114,8 +143,12 @@ function App() {
                         <Box mt={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
+                                    <Typography variant="h5" component="h2">
+                                        Heures vs Module
+                                    </Typography>
                                     <Members></Members>
                                 </Box>
+
                             </Paper>
                         </Box>
                     </Grid>
@@ -123,6 +156,11 @@ function App() {
                     <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Box mt={0}>
                             <Paper elevation={4}>
+                                <Box p={2}>
+                                    <Typography variant="h5" component="h2">
+                                        Arbre des jalons
+                                    </Typography>
+                                </Box>
                                 <Box p={2}>
                                     <MindMap></MindMap>
                                 </Box>
@@ -134,6 +172,9 @@ function App() {
 
             </Box>
             <BackendTest></BackendTest>
+            <Box p={2}>
+                Tableau généré le {today}
+            </Box>
         </div>
     );
 }

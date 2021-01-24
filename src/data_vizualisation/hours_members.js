@@ -8,7 +8,6 @@ class Members extends React.Component {
     render() {
         return (
             <Chart id="chart"
-                   title="Temps vs Membres"
                    dataSource={grossProductData}
                    onPointClick={this.onPointClick}
             >
