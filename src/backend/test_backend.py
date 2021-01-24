@@ -76,31 +76,6 @@ result = client_asana.tasks.search_tasks_for_workspace(workspace_gid, {'resource
 milestones = list(result)
 
 
-# I need:
-# - the main ratio for the project,
-# - the hours vs type,
-# - hours vs module
-# - hours vs member (actual and average)
-# - and get the general information from a specially tagged task.
-
-# Example of how the data needs to be saved for the graph tree. For now, only save the task name in the "name" attribute.
-# name: 'Parent',
-#     children: [
-#         {
-#             name: 'Child Two',
-#             textProps: {x: -25, y: 25},
-#             children: [{
-#                 name: 'Child One'
-#             }, {
-#                 name: 'Child Two',
-#                 children: [{
-#                     name: 'Child One'
-#                 }, {
-#                     name: 'Child Two'
-#                 }]
-#             }]
-#         },
-
 for task in milestones:
     if task["due_on"] != None:
         if start_session_datetime < datetime.strptime(task["due_on"], "%Y-%m-%d"):
