@@ -6,15 +6,39 @@ const client = asana.Client.create().useAccessToken('1/1105136235820223:056448b9
 var milestones = {}
 
 
+function searchInWorkspace() {
+    return new Promise(resolve => {
+        client.tasks.searchInWorkspace('622159997203998', {'resource_subtype': 'milestone'})
+            // ,opt_fields=['due_on','assignee','completed_at','custom_fields','name', 'created_at', 'resource_subtype'], opt_pretty=True
+            .then((result) => {
+                milestones = result
+                console.log("milestones")
+                console.dir(result)
+                resolve(result);
+            });
+    })
+}
 
-client.tasks.searchInWorkspace('622159997203998', {'resource_subtype': 'milestone'})
-// ,opt_fields=['due_on','assignee','completed_at','custom_fields','name', 'created_at', 'resource_subtype'], opt_pretty=True
-    .then((result) => {
-    milestones = result
-    console.log("milestones")
-    console.dir(result)
-});
+function searchInWorkspace2() {
+    return new Promise(resolve => {
+        client.tasks.searchInWorkspace('622159997203998', {'resource_subtype': 'milestone'})
+            // ,opt_fields=['due_on','assignee','completed_at','custom_fields','name', 'created_at', 'resource_subtype'], opt_pretty=True
+            .then((result) => {
+                milestones = result
+                console.log("milestones2")
+                console.dir(result)
+                resolve();
+            });
+    })
+}
 
+
+async function test() {
+    const milestones = await searchInWorkspace();
+    console.log(milestones)
+}
+
+test()
 // client.tasks.dependencies('1199564096090054')
 //     .then((result) => {
 //         console.log("dependencies")
