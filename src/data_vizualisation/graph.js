@@ -11,7 +11,7 @@ const client = asana.Client.create().useAccessToken('1/1105136235820223:056448b9
 
 function Graph() {
     const [graph, updateGraph] = React.useState([]);
-    var dataLoaded = false;
+    const [dataLoaded, changeLoadStatus] = React.useState(false);
     var tree = {}
     React.useEffect(() => {
         console.log(tree)
@@ -117,6 +117,7 @@ function Graph() {
         await recursive(dependencies, tree)
         console.log(tree)
         updateGraph(tree)
+        changeLoadStatus(true)
         return tree
     }
 
