@@ -8,7 +8,6 @@ import PieChart, {
     Export
 } from 'devextreme-react/pie-chart';
 
-import { areas } from '../data/data.js';
 
 function PieChartHoursModules(props) {
 
@@ -27,7 +26,7 @@ function PieChartHoursModules(props) {
                 palette="Bright"
             >
                 <Series
-                    argumentField="country"
+                    argumentField="name"
                     valueField="area"
                 >
                     <Label visible={true}>

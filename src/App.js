@@ -58,6 +58,8 @@ function App() {
     const [hoursPerModule, updateHoursPerModule] = React.useState([]);
     const [hoursPerModuleLoading, updateHoursPerModuleLoading] = React.useState(true);
 
+    const [hoursPerType, updateHoursPerType] = React.useState([]);
+
     let grossProductData = [{
         state: 'Michael Simard',
         moyenne: 0,
@@ -286,8 +288,10 @@ function App() {
         updateHoursPerMemberLoading(false)
 
         const array = await pie_chart(entry_list_week)
-        updateHoursPerModule(array)
+        updateHoursPerModule(modules)
         updateHoursPerModuleLoading(false)
+
+        updateHoursPerType(array)
         console.log(array)
         console.log(modules)
 
@@ -376,7 +380,7 @@ function App() {
                             <Paper elevation={4}>
                                 <Box p={2}>
                                     <Typography variant="h5" component="h2">
-                                        Heures vs Type
+                                        Heures vs Module
                                     </Typography>
                                     <PieChartHoursModules data={hoursPerModule}></PieChartHoursModules>
                                 </Box>
@@ -390,9 +394,9 @@ function App() {
                             <Paper elevation={4}>
                                 <Box p={2}>
                                     <Typography variant="h5" component="h2">
-                                        Heures vs Module
+                                        Heures vs Type
                                     </Typography>
-                                    <PieChartHoursModules data={hoursPerModule}></PieChartHoursModules>
+                                    <PieChartHoursModules data={hoursPerType}></PieChartHoursModules>
                                 </Box>
 
                             </Paper>
