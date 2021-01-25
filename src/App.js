@@ -244,6 +244,24 @@ function App() {
         })
     }
 
+    function roundData() {
+        return new Promise(resolve => {
+            for (var i =0; i < grossProductData.length; i++) {
+                grossProductData[i].moyenne = Math.round(grossProductData[i].moyenne)
+                grossProductData[i].actuel = Math.round(grossProductData[i].actuel)
+            }
+
+            for (var i =0; i < types.length; i++) {
+                types[i].area = Math.round(types[i].area)
+            }
+
+            for (var i =0; i < modules.length; i++) {
+                modules[i].area = Math.round(modules[i].area)
+            }
+            resolve();
+        })
+    }
+
     async function getData() {
 
         let entries = await harvest.time_entries.get({project_id: 24745864})
