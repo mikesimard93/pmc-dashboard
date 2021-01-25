@@ -14,7 +14,6 @@ function Graph() {
     const [dataLoaded, changeLoadStatus] = React.useState(false);
     var tree = {}
     React.useEffect(() => {
-        console.log(tree)
         test()
     }, [graph])
 
@@ -84,7 +83,7 @@ function Graph() {
                 await fillObject(obj, dependency, dependency_time)
                 var sub_task_dependencies = await getDependencies(dependency.gid)
                 if (sub_task_dependencies.length !== 0) {
-                    console.log(obj.children)
+                    // console.log(obj.children)
                     var time_to_add = await recursive(sub_task_dependencies, obj.children[obj.children.length - 1])
                 }
                 else {}
@@ -97,7 +96,6 @@ function Graph() {
     async function test() {
         var top_task = {}
         const milestones = await getMilestones();
-        // console.dir(milestones.data)
         var i;
         for (i = 0; i < milestones.data.length; i++) {
             const task = await getTask(milestones.data[i].gid);

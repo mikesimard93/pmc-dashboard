@@ -29,18 +29,22 @@ const account_id = 1283808
 const token = '2297874.pt.O_TLl_k0m8XTbi3eA5iXzoPkKHUftpx4Mp9Fq8zThEI8gqx2DY95hqJbDn5a0l9thCJEug23Z_UBuAh8sifVzw'
 const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
+
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 7;
+var pastDate = weekAgo.getDate() - 8;
 weekAgo.setDate(pastDate);
-var date = new Date(2021, 0, 10, 0, 0, 0, 0);
 
-
-// Date Generation
+var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 today = dd + '/' + mm + '/' + yyyy;
+
+
+var yesterday = new Date();
+pastDate = yesterday.getDate() - 1;
+yesterday.setDate(pastDate);
 
 
 
@@ -98,39 +102,57 @@ function App() {
 
 
     let modules = [{
-        name: 'Présentation',
+        name: 'Admin',
         area: 0
     }, {
-        name: 'Conception',
+        name: 'Contrôle',
         area: 0
     }, {
-        name: 'Gestion',
+        name: 'Chassis',
         area: 0
     }, {
-        name: 'Rencontre',
+        name: 'Puissance',
         area: 0
     }, {
-        name: 'A.P.',
+        name: 'Bras',
         area: 0
     }, {
-        name: 'Fabrication',
+        name: 'Suspension',
+        area: 0
+    }, {
+        name: 'Propulsion',
+        area: 0
+    }, {
+        name: 'Intégration',
+        area: 0
+    }, {
+        name: 'Science',
+        area: 0
+    }, {
+        name: 'Connect 4',
         area: 0
     }];
 
     let types = [{
+        name: 'Rencontre',
+        area: 0
+    },{
+        name: 'Conception',
+        area: 0
+    },{
         name: 'Gestion',
         area: 0
     }, {
         name: 'Fabrication & Test',
         area: 0
     }, {
-        name: 'Activité Pédagogique',
+        name: 'Activité pédagogique',
         area: 0
     }, {
         name: 'Présentation',
         area: 0
     }, {
-        name: 'Rédaction.',
+        name: 'Rédaction',
         area: 0
     }, {
         name: 'Travail COROM',
@@ -153,8 +175,7 @@ function App() {
         })
     }
 
-    function get_hours(entry_list, type, session_date) {
-        var today = new Date();
+    function get_hours(entry_list, type, session_date, today) {
         var diff =(today.getTime() - session_date.getTime()) / 1000;
         diff /= (60 * 60 * 24 * 7);
         var week = Math.abs(Math.round(diff));
@@ -168,7 +189,6 @@ function App() {
                     }
                     else if (type === "moyenne") {
                         grossProductData[j].moyenne += entry_list[i].hours
-                        console.log(entry_list[i].hours)
                     }
 
                 }
@@ -181,29 +201,43 @@ function App() {
 
     }
 
-    async function pie_chart(entries) {
+    function pie_chart(entries) {
         return new Promise(async resolve => {
             for (var i = 0; i < entries.length; i++) {
-                // console.log(i)
+                console.log(String(i) + " entry over " + String(entries.length) + " entries")
                 try {
-                    // console.log(entries[i].external_reference.id)
                     const task = await getTask(entries[i].external_reference.id)
+                    var task_module, task_type
+                    if (task.custom_fields[0].name == "Harvest") {
+                        task_type = task.custom_fields[0].enum_value.name
+                        task_module = task.custom_fields[1].enum_value.name
+                    }
+                    else {
+                        task_type = task.custom_fields[1].enum_value.name
+                        task_module = task.custom_fields[0].enum_value.name
+                    }
+                    
                     for (var j = 0; j < modules.length; j++) {
-                        if (task.custom_fields[0].enum_value.name === modules[j].name) {
+                        if (task_module === modules[j].name) {
                             modules[j].area += entries[i].hours
+                            break;
                         }
-                        // console.log(modules)
-
+                
                     }
                     for (var k = 0; k < types.length; k++) {
-                        if (task.custom_fields[1].enum_value.name === types[j].name) {
-                            types[j].area += entries[i].hours
+                        // console.log(task_type)
+                        // console.log(task_type)
+                        if (task_type == types[k].name) {
+                            types[k].area += entries[i].hours
+                            break;
                         }
                     }
                 }
                 catch(err) {
-                    console.log(err)
+                    // console.log(err)
                 }
+                // console.log(modules)
+                // console.log(types)
 
             }
             resolve(types);
@@ -221,15 +255,15 @@ function App() {
             var month = parts[1]
             var day = parts[2]
             var entry_date = new Date(year, month-1, day)
-            if (entry_date > weekAgo) {
+            if (entry_date > weekAgo && entries[i].external_reference.id !== '1199598736876796') {
                 entry_list_week.push(entries[i])
             }
-            if (entry_date > date) {
+            if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
                 entry_list_session.push(entries[i])
             }
         }
-        get_hours(entry_list_week, "actuel", date)
-        get_hours(entry_list_session, "moyenne", date)
+        get_hours(entry_list_week, "actuel", weekAgo, yesterday)
+        get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
         updateHoursPerMember(grossProductData)
         updateHoursPerMemberLoading(false)
 
@@ -237,6 +271,7 @@ function App() {
         updateHoursPerModule(array)
         updateHoursPerModuleLoading(false)
         console.log(array)
+        console.log(modules)
 
     }
 
