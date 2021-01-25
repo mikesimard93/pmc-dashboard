@@ -19,10 +19,8 @@ import PieChartHours from './data_vizualisation/pie_chart_hours'
 import PieChartHoursModules from './data_vizualisation/pie_chart_modules_hours'
 
 // Graph Tree
-import MindMap from './data_vizualisation/graph'
+import Graph from './data_vizualisation/graph'
 
-// Data Gathering
-import BackendTest from './backend/backend'
 
 
 // Date Generation
@@ -162,7 +160,7 @@ function App() {
                                     </Typography>
                                 </Box>
                                 <Box p={2}>
-                                    <MindMap></MindMap>
+                                    <Graph></Graph>
                                 </Box>
                             </Paper>
                         </Box>
@@ -171,7 +169,6 @@ function App() {
                 </Grid>
 
             </Box>
-            <BackendTest></BackendTest>
             <Box p={2}>
                 Tableau généré le {today}
             </Box>
