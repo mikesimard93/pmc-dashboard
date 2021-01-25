@@ -22,13 +22,13 @@ function PieChartHoursModules(props) {
     React.useEffect(() => {
         updateData(props.data)
         changeLoadStatus(props.loading)
-    }, [props.data])
+    }, [props.data, props.loading])
 
         return (
             <div >
                 {(function () {
                     if (loading) {
-                        return <Box > <CircularProgress size={40} />
+                        return <Box pt={2}> <CircularProgress size={40} />
                             <Box pt={2}>May take several minutes to load..</Box>
                         </Box>
                     } else {

@@ -398,7 +398,7 @@ function App() {
                             <Paper elevation={4}>
                                 <Box p={2}>
                                     <Typography variant="h5" component="h2">
-                                        Heures vs Membre
+                                        Heures vs Type
                                     </Typography>
                                     <PieChartHoursModules loading={hoursPerTypeLoading} data={hoursPerType}></PieChartHoursModules>
                                 </Box>
@@ -412,7 +412,7 @@ function App() {
                             <Paper elevation={4}>
                                 <Box p={2}>
                                     <Typography variant="h5" component="h2">
-                                        Heures vs Module
+                                        Heures vs Membre
                                     </Typography>
                                     <Members data={hoursPerMember} loading={hoursPerMemberLoading}></Members>
                                 </Box>
