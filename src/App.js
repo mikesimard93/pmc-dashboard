@@ -15,12 +15,24 @@ import ToWatch from './data_vizualisation/to_watch'
 // KPIs Components
 import GaugePerformance from './data_vizualisation/gauge'
 import FinancesGauge from './data_vizualisation/finance_gauge'
-import PieChartHours from './data_vizualisation/pie_chart_hours'
 import PieChartHoursModules from './data_vizualisation/pie_chart_modules_hours'
 
 // Graph Tree
 import Graph from './data_vizualisation/graph'
 
+
+// Pie Charts creation
+const asana = require('asana');
+const client = asana.Client.create().useAccessToken('1/130782075921760:ea95e018abbbc064e35274b2f6bc6cce'); // Mike's key
+const Harvest = require('node-harvest-api')
+const account_id = 1283808
+const token = '2297874.pt.O_TLl_k0m8XTbi3eA5iXzoPkKHUftpx4Mp9Fq8zThEI8gqx2DY95hqJbDn5a0l9thCJEug23Z_UBuAh8sifVzw'
+const app_name = 'PMC dashboard'
+const harvest = new Harvest(account_id, token, app_name)
+var weekAgo = new Date();
+var pastDate = weekAgo.getDate() - 7;
+weekAgo.setDate(pastDate);
+var date = new Date(2021, 0, 10, 0, 0, 0, 0);
 
 
 // Date Generation
@@ -31,7 +43,204 @@ var yyyy = today.getFullYear();
 today = dd + '/' + mm + '/' + yyyy;
 
 
+
+
+
 function App() {
+
+    const [hoursPerMember, updateHoursPerMember] = React.useState([]);
+    const [hoursPerMemberLoading, updateHoursPerMemberLoading] = React.useState(true);
+
+    const [hoursPerModule, updateHoursPerModule] = React.useState([]);
+    const [hoursPerModuleLoading, updateHoursPerModuleLoading] = React.useState(true);
+
+    let grossProductData = [{
+        state: 'Michael Simard',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Simon Chamorro',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Samuel Hovington',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Nicolas Morin',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Santiago Moya',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Anthony Marchand',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Antoine Leblanc',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Raphaël Labrecque',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'William Dubois',
+        moyenne: 0,
+        actuel: 0,
+    }, {
+        state: 'Étienne Gendron',
+        moyenne: 0,
+        actuel: 0,
+    }];
+
+
+    let modules = [{
+        name: 'Présentation',
+        area: 0
+    }, {
+        name: 'Conception',
+        area: 0
+    }, {
+        name: 'Gestion',
+        area: 0
+    }, {
+        name: 'Rencontre',
+        area: 0
+    }, {
+        name: 'A.P.',
+        area: 0
+    }, {
+        name: 'Fabrication',
+        area: 0
+    }];
+
+    let types = [{
+        name: 'Gestion',
+        area: 0
+    }, {
+        name: 'Fabrication & Test',
+        area: 0
+    }, {
+        name: 'Activité Pédagogique',
+        area: 0
+    }, {
+        name: 'Présentation',
+        area: 0
+    }, {
+        name: 'Rédaction.',
+        area: 0
+    }, {
+        name: 'Travail COROM',
+        area: 0
+    }, {
+        name: 'Autre (expliquez)',
+        area: 0
+    }];
+
+    React.useEffect(() => {
+        getData()
+    }, [])
+
+    function getTask(task_gid) {
+        return new Promise(async resolve => {
+            client.tasks.getTask(task_gid)
+                .then((result) => {
+                    resolve(result);
+                });
+        })
+    }
+
+    function get_hours(entry_list, type, session_date) {
+        var today = new Date();
+        var diff =(today.getTime() - session_date.getTime()) / 1000;
+        diff /= (60 * 60 * 24 * 7);
+        var week = Math.abs(Math.round(diff));
+
+        for (var i = 0; i < entry_list.length; i++) {
+            for (var j = 0; j < grossProductData.length; j++) {
+                if (entry_list[i].user.name === grossProductData[j].state)
+                {
+                    if (type === "actuel"){
+                        grossProductData[j].actuel += entry_list[i].hours
+                    }
+                    else if (type === "moyenne") {
+                        grossProductData[j].moyenne += entry_list[i].hours
+                        console.log(entry_list[i].hours)
+                    }
+
+                }
+            }
+        }
+
+        for (var j = 0; j < grossProductData.length; j++) {
+            grossProductData[j].moyenne /= week
+        }
+
+    }
+
+    async function pie_chart(entries) {
+        return new Promise(async resolve => {
+            for (var i = 0; i < entries.length; i++) {
+                // console.log(i)
+                try {
+                    // console.log(entries[i].external_reference.id)
+                    const task = await getTask(entries[i].external_reference.id)
+                    for (var j = 0; j < modules.length; j++) {
+                        if (task.custom_fields[0].enum_value.name === modules[j].name) {
+                            modules[j].area += entries[i].hours
+                        }
+                        // console.log(modules)
+
+                    }
+                    for (var k = 0; k < types.length; k++) {
+                        if (task.custom_fields[1].enum_value.name === types[j].name) {
+                            types[j].area += entries[i].hours
+                        }
+                    }
+                }
+                catch(err) {
+                    console.log(err)
+                }
+
+            }
+            resolve(types);
+        })
+    }
+
+    async function getData() {
+
+        let entries = await harvest.time_entries.get({project_id: 24745864})
+        var entry_list_session = []
+        var entry_list_week = []
+        for (var i =0; i < entries.length; i++) {
+            var parts = entries[i].spent_date.split('-');
+            var year = parts[0]
+            var month = parts[1]
+            var day = parts[2]
+            var entry_date = new Date(year, month-1, day)
+            if (entry_date > weekAgo) {
+                entry_list_week.push(entries[i])
+            }
+            if (entry_date > date) {
+                entry_list_session.push(entries[i])
+            }
+        }
+        get_hours(entry_list_week, "actuel", date)
+        get_hours(entry_list_session, "moyenne", date)
+        updateHoursPerMember(grossProductData)
+        updateHoursPerMemberLoading(false)
+
+        const array = await pie_chart(entry_list_week)
+        updateHoursPerModule(array)
+        updateHoursPerModuleLoading(false)
+        console.log(array)
+
+    }
+
+
     return (
         <div className="App">
             <Grid container direction={'row'}>
@@ -116,7 +325,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Heures vs Type
                                     </Typography>
-                                    <PieChartHours></PieChartHours>
+                                    <PieChartHoursModules data={hoursPerModule}></PieChartHoursModules>
                                 </Box>
 
                             </Paper>
@@ -130,7 +339,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Heures vs Module
                                     </Typography>
-                                    <PieChartHoursModules></PieChartHoursModules>
+                                    <PieChartHoursModules data={hoursPerModule}></PieChartHoursModules>
                                 </Box>
 
                             </Paper>
@@ -144,7 +353,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Heures vs Module
                                     </Typography>
-                                    <Members></Members>
+                                    <Members data={hoursPerMember} loading={hoursPerMemberLoading}></Members>
                                 </Box>
 
                             </Paper>
@@ -160,7 +369,7 @@ function App() {
                                     </Typography>
                                 </Box>
                                 <Box p={2}>
-                                    {/*<Graph></Graph>*/}
+                                    <Graph></Graph>
                                 </Box>
                             </Paper>
                         </Box>

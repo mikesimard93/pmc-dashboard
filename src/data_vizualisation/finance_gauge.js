@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarGauge, Label, Export, Legend, Title, Font } from 'devextreme-react/bar-gauge';
 
-const values = [8000, -2000, 3500];
+const values = [9138, -5511, 3627];
 const textD = ["Revenus", "Dépenses", "Balance"];
 
 

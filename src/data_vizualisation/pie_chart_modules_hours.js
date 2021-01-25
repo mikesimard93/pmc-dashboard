@@ -10,23 +10,21 @@ import PieChart, {
 
 import { areas } from '../data/data.js';
 
-class PieChartHoursModules extends React.Component {
-    constructor(props) {
-        super(props);
+function PieChartHoursModules(props) {
 
-        this.pointClickHandler = this.pointClickHandler.bind(this);
-        this.legendClickHandler = this.legendClickHandler.bind(this);
-    }
+    const [data, updateData] = React.useState([]);
 
-    render() {
+    // The useEffect will be called at the beginning AND each time the props.Jobs changes
+    // The component will be rendered each time useEffect is executed.
+    React.useEffect(() => {
+        updateData(props.data)
+    }, [props.data])
+
         return (
             <PieChart
                 id="pie"
-                dataSource={areas}
+                dataSource={data}
                 palette="Bright"
-
-                onPointClick={this.pointClickHandler}
-                onLegendClick={this.legendClickHandler}
             >
                 <Series
                     argumentField="country"
@@ -41,22 +39,6 @@ class PieChartHoursModules extends React.Component {
                 <Export enabled={false} />
             </PieChart>
         );
-    }
-
-    pointClickHandler(e) {
-        this.toggleVisibility(e.target);
-    }
-
-    legendClickHandler(e) {
-        let arg = e.target;
-        let item = e.component.getAllSeries()[0].getPointsByArg(arg)[0];
-
-        this.toggleVisibility(item);
-    }
-
-    toggleVisibility(item) {
-        item.isVisible() ? item.hide() : item.show();
-    }
 }
 
 export default PieChartHoursModules;

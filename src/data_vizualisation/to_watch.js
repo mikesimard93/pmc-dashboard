@@ -34,15 +34,16 @@ export default function OutlinedCard() {
                     Éléments
                 </Typography>
                 <Typography variant="h5" component="h2" color="error">
-                    IMPORTANT
+                    IMPORTANTS
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
                     à surveiller
                 </Typography>
                 <Typography variant="body2"  align="left" component="p">
                     <ul>
-                        <li>Échéancier serré -> Supervision des modules plus étroite suggérée</li>
-                        <li>Utilisation d'Asana de façon impeccable essentielle</li>
+                        <li>Charge de travail vs Module à surveiller</li>
+                        <li>Aide inter-modules nécessaire (pour des validations du moins)</li>
+                        <li>Tests & Intégration à prévoir plus tôt pour détecter les problèmes typiques d'intégration robotique</li>
                     </ul>
                 </Typography>
             </CardContent>
