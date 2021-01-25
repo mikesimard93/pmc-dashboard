@@ -160,7 +160,7 @@ function App() {
                                     </Typography>
                                 </Box>
                                 <Box p={2}>
-                                    <Graph></Graph>
+                                    {/*<Graph></Graph>*/}
                                 </Box>
                             </Paper>
                         </Box>
