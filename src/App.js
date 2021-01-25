@@ -59,6 +59,7 @@ function App() {
     const [hoursPerModuleLoading, updateHoursPerModuleLoading] = React.useState(true);
 
     const [hoursPerType, updateHoursPerType] = React.useState([]);
+    const [hoursPerTypeLoading, updateHoursPerTypeLoading] = React.useState(true);
 
     let grossProductData = [{
         state: 'Michael Simard',
@@ -293,6 +294,8 @@ function App() {
         updateHoursPerModuleLoading(false)
 
         updateHoursPerType(array)
+        updateHoursPerModuleLoading(false)
+        updateHoursPerTypeLoading(false)
         console.log(array)
         console.log(modules)
 
@@ -383,7 +386,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Heures vs Module
                                     </Typography>
-                                    <PieChartHoursModules data={hoursPerModule}></PieChartHoursModules>
+                                    <PieChartHoursModules data={hoursPerModule} loading={hoursPerModuleLoading}></PieChartHoursModules>
                                 </Box>
 
                             </Paper>
@@ -395,9 +398,9 @@ function App() {
                             <Paper elevation={4}>
                                 <Box p={2}>
                                     <Typography variant="h5" component="h2">
-                                        Heures vs Type
+                                        Heures vs Membre
                                     </Typography>
-                                    <PieChartHoursModules data={hoursPerType}></PieChartHoursModules>
+                                    <PieChartHoursModules loading={hoursPerTypeLoading} data={hoursPerType}></PieChartHoursModules>
                                 </Box>
 
                             </Paper>
