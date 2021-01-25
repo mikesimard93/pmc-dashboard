@@ -288,6 +288,7 @@ function App() {
         updateHoursPerMemberLoading(false)
 
         const array = await pie_chart(entry_list_week)
+        await roundData()
         updateHoursPerModule(modules)
         updateHoursPerModuleLoading(false)
 
