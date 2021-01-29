@@ -271,7 +271,7 @@ function App() {
             var month = parts[1]
             var day = parts[2]
             var entry_date = new Date(year, month-1, day)
-            if (entry_date > weekAgo && entries[i].external_reference.id !== '1199598736876796') {
+            if (entry_date > weekAgo  && entry_date < yesterday && entries[i].external_reference.id !== '1199598736876796') {
                 entry_list_week.push(entries[i])
             }
             if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
