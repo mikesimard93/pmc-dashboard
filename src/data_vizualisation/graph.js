@@ -6,7 +6,7 @@ import '../App.css';
 
 
 const asana = require('asana');
-const client = asana.Client.create().useAccessToken('1/1105136235820223:70f88e295406e4a4c73ba90cce7a7e69');
+const client = asana.Client.create().useAccessToken('1/130782075921760:ea95e018abbbc064e35274b2f6bc6cce'); // Mike's key
 
 const Harvest = require('node-harvest-api')
 const account_id = 1283808
@@ -25,9 +25,11 @@ function Graph() {
         test()
     }, [graph])
 
+    var milestones = {}
     function getMilestones() {
         return new Promise(resolve => {
             client.tasks.searchInWorkspace('622159997203998', {'resource_subtype': 'milestone'})
+                // ,opt_fields=['due_on','assignee','completed_at','custom_fields','name', 'created_at', 'resource_subtype'], opt_pretty=True
                 .then((result) => {
                     resolve(result);
                 });
@@ -125,6 +127,21 @@ function Graph() {
             resolve(time);
         });
     }
+
+    function keepMilestoneOnly(obj) {
+        return new Promise(async resolve => {
+            for (var i = 0; i < obj.children.length; i++) {
+                if (obj.children[i].type !== "milestone") {
+                    delete obj.children[i]
+                }
+                else {
+                    await keepMilestoneOnly(obj.children[i])
+                }
+            }
+
+            resolve(obj);
+        });
+    }
     async function test() {
         var top_task
         const milestones = await getMilestones();
@@ -149,7 +166,6 @@ function Graph() {
             }
             catch(err){}
         }
-        console.log(top_task)
         const dependencies = await getDependencies(top_task.gid)
 
         tree.name = top_task.name
@@ -157,8 +173,10 @@ function Graph() {
         await fillObject(tree, top_task)
         await recursive(dependencies, tree)
         console.log(tree)
+        await keepMilestoneOnly(tree)
         updateGraph(tree)
         changeLoadStatus(true)
+        
         return tree
     }
 
