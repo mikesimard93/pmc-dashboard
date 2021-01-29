@@ -296,42 +296,6 @@ function App() {
 
     async function getData() {
 
-<<<<<<< HEAD
-        // let entries = await harvest.time_entries.get({project_id: 24745864})
-        // var entry_list_session = []
-        // var entry_list_week = []
-        // for (var i =0; i < entries.length; i++) {
-        //     var parts = entries[i].spent_date.split('-');
-        //     var year = parts[0]
-        //     var month = parts[1]
-        //     var day = parts[2]
-        //     var entry_date = new Date(year, month-1, day)
-        //     if (entry_date > weekAgo  && entry_date < yesterday && entries[i].external_reference.id !== '1199598736876796') {
-        //         entry_list_week.push(entries[i])
-        //     }
-        //     if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
-        //         entry_list_session.push(entries[i])
-        //     }
-        // }
-        // console.log(entry_list_week)
-        // get_hours(entry_list_week, "actuel", weekAgo, yesterday)
-        // get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
-        // updateHoursPerMember(grossProductData)
-        // updateHoursPerMemberLoading(false)
-
-        // const array = await pie_chart(entry_list_week)
-        // await formatData()
-        // updateHoursPerModule(modules)
-        // updateHoursPerModuleLoading(false)
-
-        // updateHoursPerType(array)
-        // updateHoursPerModuleLoading(false)
-        // updateHoursPerTypeLoading(false)
-        // console.log(array)
-        // console.log(modules)
-
-        // const infos = getInfos()        
-=======
         const infos = await getInfos()
         console.log(infos.summary)
         updateSummaryIntro(infos.summary)
@@ -373,7 +337,6 @@ function App() {
         console.log(array)
         console.log(modules)
 
->>>>>>> 24a0adbb1c6aa3b55c73cf22c7bd3b53bc885488
 
 
 
