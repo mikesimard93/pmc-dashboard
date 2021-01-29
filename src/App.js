@@ -177,6 +177,33 @@ function App() {
                 });
         })
     }
+    function getInfoTask() {
+        return new Promise(async resolve => {
+            client.tags.getTasksWithTag("1199709478483303")
+                .then((result) => {
+                    resolve(result);
+                });
+        })
+    }
+
+    function getInfos() {
+        return new Promise(async resolve => {
+            var newest_date = startSessionDate
+            var taskWithInfos
+            var task = await getInfoTask()
+            for (var i = 0; i < task.data.length; i++) {
+                const subTask = await getTask(task.data[i].gid)
+                var d = new Date(subTask.created_at);
+                if (d > newest_date) {
+                    newest_date = d
+                    taskWithInfos = subTask
+                }
+            }
+            console.log(taskWithInfos.notes)
+            var infos = JSON.parse(taskWithInfos.notes);
+            resolve(infos);
+        })
+    }
 
     function get_hours(entry_list, type, session_date, today) {
         var diff =(today.getTime() - session_date.getTime()) / 1000;
@@ -294,6 +321,8 @@ function App() {
         updateHoursPerTypeLoading(false)
         console.log(array)
         console.log(modules)
+
+        const infos = getInfos()        
 
     }
 
