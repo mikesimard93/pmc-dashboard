@@ -228,8 +228,6 @@ function App() {
                 
                     }
                     for (var k = 0; k < types.length; k++) {
-                        // console.log(task_type)
-                        // console.log(task_type)
                         if (task_type == types[k].name) {
                             types[k].area += entries[i].hours
                             break;
@@ -237,17 +235,14 @@ function App() {
                     }
                 }
                 catch(err) {
-                    // console.log(err)
                 }
-                // console.log(modules)
-                // console.log(types)
 
             }
             resolve(types);
         })
     }
 
-    function roundData() {
+    function formatData() {
         return new Promise(resolve => {
             for (var i =0; i < grossProductData.length; i++) {
                 grossProductData[i].moyenne = Math.round(grossProductData[i].moyenne)
@@ -283,13 +278,14 @@ function App() {
                 entry_list_session.push(entries[i])
             }
         }
+        console.log(entry_list_week)
         get_hours(entry_list_week, "actuel", weekAgo, yesterday)
         get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
         updateHoursPerMember(grossProductData)
         updateHoursPerMemberLoading(false)
 
         const array = await pie_chart(entry_list_week)
-        await roundData()
+        await formatData()
         updateHoursPerModule(modules)
         updateHoursPerModuleLoading(false)
 
