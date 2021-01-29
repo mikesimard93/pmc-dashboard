@@ -1,41 +1,46 @@
 import React from 'react';
 import { BarGauge, Label, Export, Legend, Title, Font } from 'devextreme-react/bar-gauge';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
-const values = [9138, -5511, 3627];
 const textD = ["Revenus", "Dépenses", "Balance"];
 
 
-class App extends React.Component {
+export default function OutlinedCard(props) {
 
-    render() {
-        return (
-            <BarGauge
-                id="gauge"
-                startValue={-10000}
-                endValue={10000}
-                baseValue={0}
-                values={values}
-                palette="Ocean"
-            >
-                <Label customizeText={this.customizeTooltip} />
-                <Export enabled={false} />
-                <Legend visible={true} customizeText={this.customizeText} verticalAlignment="bottom" horizontalAlignment="center" />
-            </BarGauge>
-        );
-    }
+    const [values, updateValues] = React.useState([]);
 
-    customizeTooltip({ valueText }) {
+    React.useEffect(() => {
+        updateValues(props.data)
+    }, [props.data])
+
+
+    function customizeTooltip({ valueText }) {
         return `${valueText} $`;
     }
 
-    customizeText(arg) {
+    function customizeText(arg) {
         return getText(arg.item, arg.text);
     }
-}
 
-function getText(item, text) {
-    return `${textD[item.index]}`;
-}
+    function getText(item, text) {
+        return `${textD[item.index]}`;
+    }
 
-export default App;
+    return (
+        <BarGauge
+            id="gauge"
+            startValue={-10000}
+            endValue={10000}
+            baseValue={0}
+            values={values}
+            palette="Ocean"
+        >
+            <Label customizeText={customizeTooltip} />
+            <Export enabled={false} />
+            <Legend visible={true} customizeText={customizeText} verticalAlignment="bottom" horizontalAlignment="center" />
+        </BarGauge>
+    );
+}
 

@@ -61,6 +61,13 @@ function App() {
     const [hoursPerType, updateHoursPerType] = React.useState([]);
     const [hoursPerTypeLoading, updateHoursPerTypeLoading] = React.useState(true);
 
+    const [summaryIntro, updateSummaryIntro] = React.useState([]);
+    const [summaryBullets, updateSummaryBullets] = React.useState([]);
+
+    const [toWatch, updateToWatch] = React.useState([]);
+    const [financeValues, updateFinanceValues] = React.useState([]);
+    const [gauge, updateGauge] = React.useState([]);
+
     let grossProductData = [{
         state: 'Michael Simard',
         moyenne: 0,
@@ -289,6 +296,14 @@ function App() {
 
     async function getData() {
 
+        const infos = await getInfos()
+        console.log(infos.summary)
+        updateSummaryIntro(infos.summary)
+        updateSummaryBullets(infos.summary_bullets)
+        updateToWatch(infos.important)
+        updateFinanceValues(infos.finance)
+
+
         let entries = await harvest.time_entries.get({project_id: 24745864})
         var entry_list_session = []
         var entry_list_week = []
@@ -322,8 +337,14 @@ function App() {
         console.log(array)
         console.log(modules)
 
-        const infos = getInfos()        
 
+
+
+    }
+
+    function updateRatio(ratio){
+        updateGauge(ratio)
+        console.log('to' + gauge)
     }
 
 
@@ -362,7 +383,7 @@ function App() {
                     <Grid item xs={12} sm={12} md={3} lg={3}>
                         <Box m={0}>
                             <Paper height="100%"  elevation={4}>
-                                <Intro></Intro>
+                                <Intro summary={summaryIntro} bullets={summaryBullets}></Intro>
                             </Paper>
                         </Box>
                     </Grid>
@@ -371,7 +392,7 @@ function App() {
                         <Box  m={0}>
                             <Paper elevation={4}>
                                 <Box p={0}>
-                                    <ToWatch></ToWatch>
+                                    <ToWatch data={toWatch}></ToWatch>
                                 </Box>
                             </Paper>
                         </Box>
@@ -385,7 +406,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Ratio
                                     </Typography>
-                                    <GaugePerformance></GaugePerformance>
+                                    <GaugePerformance data={gauge}></GaugePerformance>
                                 </Box>
                             </Paper>
                         </Box>
@@ -398,7 +419,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Finances
                                     </Typography>
-                                    <FinancesGauge></FinancesGauge>
+                                    <FinancesGauge data={financeValues}></FinancesGauge>
                                 </Box>
                             </Paper>
                         </Box>
@@ -455,7 +476,7 @@ function App() {
                                     </Typography>
                                 </Box>
                                 <Box p={2}>
-                                    <Graph></Graph>
+                                    <Graph fromChildToParentCallback={updateRatio}></Graph>
                                 </Box>
                             </Paper>
                         </Box>
