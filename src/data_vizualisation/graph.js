@@ -159,7 +159,9 @@ function Graph(props) {
         console.log(tree)
         updateGraph(tree)
         changeLoadStatus(true)
-        props.fromChildToParentCallback(tree.clocked_time)
+        var ratio = tree.clocked_time/tree.total_dependencies_time
+        var ratioRounded = Math.round((ratio + Number.EPSILON) * 100) / 100
+        props.fromChildToParentCallback(ratioRounded)
         return tree
     }
 
