@@ -17,7 +17,7 @@ let entries = []
 var entry_list_session = []
 var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
 
-function Graph() {
+function Graph(props) {
     const [graph, updateGraph] = React.useState([]);
     const [dataLoaded, changeLoadStatus] = React.useState(false);
     var tree = {}
@@ -176,7 +176,7 @@ function Graph() {
         await keepMilestoneOnly(tree)
         updateGraph(tree)
         changeLoadStatus(true)
-        
+        props.fromChildToParentCallback(tree.clocked_time)
         return tree
     }
 

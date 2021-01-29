@@ -61,6 +61,13 @@ function App() {
     const [hoursPerType, updateHoursPerType] = React.useState([]);
     const [hoursPerTypeLoading, updateHoursPerTypeLoading] = React.useState(true);
 
+    const [summaryIntro, updateSummaryIntro] = React.useState([]);
+    const [summaryBullets, updateSummaryBullets] = React.useState([]);
+
+    const [toWatch, updateToWatch] = React.useState([]);
+    const [financeValues, updateFinanceValues] = React.useState([]);
+    const [gauge, updateGauge] = React.useState([]);
+
     let grossProductData = [{
         state: 'Michael Simard',
         moyenne: 0,
@@ -289,6 +296,7 @@ function App() {
 
     async function getData() {
 
+<<<<<<< HEAD
         // let entries = await harvest.time_entries.get({project_id: 24745864})
         // var entry_list_session = []
         // var entry_list_week = []
@@ -323,7 +331,57 @@ function App() {
         // console.log(modules)
 
         // const infos = getInfos()        
+=======
+        const infos = await getInfos()
+        console.log(infos.summary)
+        updateSummaryIntro(infos.summary)
+        updateSummaryBullets(infos.summary_bullets)
+        updateToWatch(infos.important)
+        updateFinanceValues(infos.finance)
 
+
+        let entries = await harvest.time_entries.get({project_id: 24745864})
+        var entry_list_session = []
+        var entry_list_week = []
+        for (var i =0; i < entries.length; i++) {
+            var parts = entries[i].spent_date.split('-');
+            var year = parts[0]
+            var month = parts[1]
+            var day = parts[2]
+            var entry_date = new Date(year, month-1, day)
+            if (entry_date > weekAgo  && entry_date < yesterday && entries[i].external_reference.id !== '1199598736876796') {
+                entry_list_week.push(entries[i])
+            }
+            if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
+                entry_list_session.push(entries[i])
+            }
+        }
+        console.log(entry_list_week)
+        get_hours(entry_list_week, "actuel", weekAgo, yesterday)
+        get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
+        updateHoursPerMember(grossProductData)
+        updateHoursPerMemberLoading(false)
+
+        const array = await pie_chart(entry_list_week)
+        await formatData()
+        updateHoursPerModule(modules)
+        updateHoursPerModuleLoading(false)
+
+        updateHoursPerType(array)
+        updateHoursPerModuleLoading(false)
+        updateHoursPerTypeLoading(false)
+        console.log(array)
+        console.log(modules)
+
+>>>>>>> 24a0adbb1c6aa3b55c73cf22c7bd3b53bc885488
+
+
+
+    }
+
+    function updateRatio(ratio){
+        updateGauge(ratio)
+        console.log('to' + gauge)
     }
 
 
@@ -362,7 +420,7 @@ function App() {
                     <Grid item xs={12} sm={12} md={3} lg={3}>
                         <Box m={0}>
                             <Paper height="100%"  elevation={4}>
-                                <Intro></Intro>
+                                <Intro summary={summaryIntro} bullets={summaryBullets}></Intro>
                             </Paper>
                         </Box>
                     </Grid>
@@ -371,7 +429,7 @@ function App() {
                         <Box  m={0}>
                             <Paper elevation={4}>
                                 <Box p={0}>
-                                    <ToWatch></ToWatch>
+                                    <ToWatch data={toWatch}></ToWatch>
                                 </Box>
                             </Paper>
                         </Box>
@@ -385,7 +443,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Ratio
                                     </Typography>
-                                    <GaugePerformance></GaugePerformance>
+                                    <GaugePerformance data={gauge}></GaugePerformance>
                                 </Box>
                             </Paper>
                         </Box>
@@ -398,7 +456,7 @@ function App() {
                                     <Typography variant="h5" component="h2">
                                         Finances
                                     </Typography>
-                                    <FinancesGauge></FinancesGauge>
+                                    <FinancesGauge data={financeValues}></FinancesGauge>
                                 </Box>
                             </Paper>
                         </Box>
@@ -455,7 +513,7 @@ function App() {
                                     </Typography>
                                 </Box>
                                 <Box p={2}>
-                                    <Graph></Graph>
+                                    <Graph fromChildToParentCallback={updateRatio}></Graph>
                                 </Box>
                             </Paper>
                         </Box>

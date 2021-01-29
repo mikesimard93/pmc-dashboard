@@ -23,9 +23,14 @@ const useStyles = makeStyles({
     },
 });
 
-export default function OutlinedCard() {
+export default function OutlinedCard(props) {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+
+    const [toWatch, updateToWatch] = React.useState([]);
+
+    React.useEffect(() => {
+        updateToWatch(props.data)
+    }, [props.data])
 
     return (
         <Card className={classes.root} variant="outlined">
@@ -40,11 +45,7 @@ export default function OutlinedCard() {
                     à surveiller
                 </Typography>
                 <Typography variant="body2"  align="left" component="p">
-                    <ul>
-                        <li>Charge de travail vs Module à surveiller</li>
-                        <li>Aide inter-modules nécessaire (pour des validations du moins)</li>
-                        <li>Tests & Intégration à prévoir plus tôt pour détecter les problèmes typiques d'intégration robotique</li>
-                    </ul>
+                    <ul>{toWatch.map(bullet => <li> {bullet} </li>)}</ul>
                 </Typography>
             </CardContent>
         </Card>

@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
@@ -23,10 +21,16 @@ const useStyles = makeStyles({
     },
 });
 
-
-export default function OutlinedCard() {
+export default function OutlinedCard(props) {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+
+    const [summaryIntro, updateSummaryIntro] = React.useState([]);
+    const [summaryBullets, updateSummaryBullets] = React.useState([]);
+
+    React.useEffect(() => {
+        updateSummaryIntro(props.summary)
+        updateSummaryBullets(props.bullets)
+    }, [props.summary, props.bullets])
 
     return (
         <Card className={classes.root} variant="outlined">
@@ -35,12 +39,8 @@ export default function OutlinedCard() {
                     Resumé
                 </Typography>
                 <Typography variant="body2" align="left" component="p">
-                    L'équipe avance à un bon rythme et des avancements concrets sont visibles. On garde le cap sur une V0 pour le 15 février.
-                    <ul>
-                        <li>Optimisations Asana presque terminées</li>
-                        <li>Assemblage débuté pour la presque totalité des modules; intégration imminente</li>
-                        <li>3-4 jours de retard sur quelques jalons; déterminer les raisons</li>
-                    </ul>
+                    {summaryIntro}
+                    <ul>{summaryBullets.map(bullet => <li> {bullet} </li>)}</ul>
                 </Typography>
             </CardContent>
         </Card>

@@ -1,32 +1,28 @@
 import React from 'react';
 import { BarGauge, Label, Legend, Export, Title, Font } from 'devextreme-react/bar-gauge';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
-const values = [1];
 const format = {
     type: 'fixedPoint',
     precision: 1
 };
 
-class App extends React.Component {
+export default function Gauge(props) {
 
-    render() {
-        return (
+    const [gauge, updateGauge] = React.useState([]);
 
-            <BarGauge
-                id="gauge"
-                startValue={0}
-                endValue={2}
-                defaultValues={values}
-            >
-                <Label indent={20} format={format} customizeText={this.customizeText} />
-                <Export enabled={false} />
-            </BarGauge>
-        );
-    }
+    React.useEffect(() => {
+        updateGauge(props.data)
+    }, [props.data])
 
-    customizeText({ valueText }) {
+    function customizeText({ valueText }) {
         return `${valueText}`;
     }
-}
 
-export default App;
+    return (
+        <Typography variant="h1">{gauge}</Typography>
+
+    );
+}
