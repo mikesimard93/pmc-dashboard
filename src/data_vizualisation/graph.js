@@ -3,6 +3,7 @@ import React from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import '../App.css';
+import Tree2 from 'react-d3-tree';
 
 
 const asana = require('asana');
@@ -68,6 +69,9 @@ function Graph(props) {
             obj.children.push( {
                 gProps: {
                     className: 'red-node'
+                },
+                attributes: {
+                    department: 'Production',
                 },
                 name: task.name,
                 gid: task.gid,
@@ -199,11 +203,16 @@ function Graph(props) {
                     <Box pt={2}>May take several minutes to load..</Box>
                     </Box>
                 } else {
-                    return <Tree
-                        data={graph}
-                        nodeRadius={30}
-                        height={2000}
-                        width={1500}/>;
+                    return (
+                        <div id="treeWrapper" style={{ width: '2000px', height: '800px' }}>
+                            <Tree2
+                                data={graph}
+                                depthFactor={400}
+                                nodeSize={ { x: 10, y: 70 }}
+
+                        />;
+                        </div>
+                    );
                 }
             })()}
         </div>
@@ -211,3 +220,11 @@ function Graph(props) {
 }
 
 export default Graph;
+//
+// <Tree
+//     data={graph}
+//     nodeRadius={30}
+//     height={2000}
+//     width={1500}
+//     animated
+//     textProps={{ dy: -10.5 }}/>

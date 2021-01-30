@@ -65,6 +65,11 @@ path.link {
   stroke-width: 1.5px;
 }
 
+.red-node {
+  fill: red;
+  stroke: red;
+}
+
 .red {
   fill: none;
   stroke: red;
