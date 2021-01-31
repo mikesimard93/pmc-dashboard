@@ -1,10 +1,76 @@
-import Tree from 'react-tree-graph';
 import React from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import '../App.css';
-import Tree2 from 'react-d3-tree';
+import Tree from 'react-d3-tree';
+import {Typography} from "@material-ui/core";
 
+const dataa =
+{
+    "name": "CEO",
+    "children": [
+    {
+        "name": "Manager",
+        "attributes": {
+            "department": "Production"
+        },
+        "children": [
+            {
+                "name": "Foreman",
+                "attributes": {
+                    "department": "Fabrication"
+                },
+                "children": [
+                    {
+                        "name": "Workers"
+                    }
+                ]
+            },
+            {
+                "name": "Foreman",
+                "attributes": {
+                    "department": "Assembly"
+                },
+                "children": [
+                    {
+                        "name": "Workers"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Manager",
+        "attributes": {
+            "department": "Marketing"
+        },
+        "children": [
+            {
+                "name": "Sales Officer",
+                "attributes": {
+                    "department": "A"
+                },
+                "children": [
+                    {
+                        "name": "Salespeople"
+                    }
+                ]
+            },
+            {
+                "name": "Sales Officer",
+                "attributes": {
+                    "department": "B"
+                },
+                "children": [
+                    {
+                        "name": "Salespeople"
+                    }
+                ]
+            }
+        ]
+    }
+]
+}
 
 const asana = require('asana');
 const client = asana.Client.create().useAccessToken('1/130782075921760:ea95e018abbbc064e35274b2f6bc6cce'); // Mike's key
@@ -17,6 +83,7 @@ const harvest = new Harvest(account_id, token, app_name)
 let entries = []
 var entry_list_session = []
 var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
+var today = new Date();
 
 function Graph(props) {
     const [graph, updateGraph] = React.useState([]);
@@ -24,7 +91,30 @@ function Graph(props) {
     var tree = {}
     React.useEffect(() => {
         test()
-    }, [graph])
+    }, [])
+
+
+
+    const containerStyles = {
+        width: "100vw",
+        height: "100vh"
+    };
+
+    const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
+        const [translate, setTranslate] = React.useState(defaultTranslate);
+        const containerRef = React.useCallback((containerElem) => {
+            if (containerElem !== null) {
+                const { width, height } = containerElem.getBoundingClientRect();
+                setTranslate({ x: width / 2, y: height / 2 });
+            }
+        }, []);
+        return [translate, containerRef];
+    };
+
+    const [translate, containerRef] = useCenteredTree();
+    const nodeSize = { x: 200, y: 200 };
+    const foreignObjectProps = { width: nodeSize.x, height: nodeSize.y, x: 20 };
+
 
     var milestones = {}
     function getMilestones() {
@@ -71,8 +161,17 @@ function Graph(props) {
                     className: 'red-node'
                 },
                 attributes: {
-                    department: 'Production',
+                    Ratio: 0,
+                    Time: 0,
                 },
+                nodeSvgShape: {
+                    shape: 'circle',
+                    shapeProps: {
+                        r: 10,
+                        fill: 'blue',
+                    },
+                },
+                rootNodeClassName: 'node__branch',
                 name: task.name,
                 gid: task.gid,
                 total_dependencies_time: 0.0,
@@ -129,6 +228,24 @@ function Graph(props) {
             }
             obj.total_dependencies_time = time.planned_time
             obj.clocked_time = time.clocked_time
+
+
+            var dueDate = new Date(obj.due_on)
+            var dueTime = dueDate.getTime()
+            var startTime = startSessionDate.getTime()
+            var todayTime = today.getTime()
+
+            var temp = (todayTime - startTime)/(dueTime - startTime)
+
+
+            var ratio = obj.clocked_time/(temp * obj.total_dependencies_time)
+            var ratioRounded = Math.round((ratio + Number.EPSILON) * 100) / 100
+
+            console.log(ratioRounded)
+            obj.attributes.Time = ratioRounded/(temp)
+            console.log(obj.attributes.Time)
+
+
             resolve(time);
         });
     }
@@ -181,6 +298,11 @@ function Graph(props) {
         tree.name = top_task.name
         tree.children = new Array();
         await fillObject(tree, top_task)
+        tree.attributes = {
+            Ratio: 0,
+            Time: 0,
+        }
+        tree.due_on = top_task.due_on
         await recursive(dependencies, tree)
         console.log(tree)
         let milestonesTree = JSON.parse(JSON.stringify(tree))
@@ -195,22 +317,56 @@ function Graph(props) {
         return milestonesTree
     }
 
+    const renderForeignObjectNode = ({
+                                          nodeDatum,
+                                          toggleNode,
+                                          foreignObjectProps
+                                      }) => (
+        <g>
+            <circle r={15}></circle>
+            {/* `foreignObject` requires width & height to be explicitly set. */}
+            <foreignObject {...foreignObjectProps}>
+                <div style={{ border: "1px solid black", backgroundColor: "#dedede" }}>
+                    {(function () {
+                        // !dataLoaded
+                        if (nodeDatum.attributes.Time > 1) {
+                            return <Typography variant="h6" color="error">À SURVEILLER</Typography>
+                        } else {
+                            return <Typography variant="h5" color="success">OK</Typography>
+                        }
+                    })()}
+                    <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
+                    <p style={{ textAlign: "center" }}>{nodeDatum.attributes.Time}</p>
+                    {nodeDatum.children && (
+                        <button style={{ width: "100%" }} onClick={toggleNode}>
+                            {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}
+                        </button>
+                    )}
+                </div>
+            </foreignObject>
+        </g>
+    );
+
     return (
         <div >
             {(function () {
+                // !dataLoaded
                 if (!dataLoaded) {
                     return <Box > <CircularProgress size={40} />
                     <Box pt={2}>May take several minutes to load..</Box>
                     </Box>
                 } else {
                     return (
-                        <div id="treeWrapper" style={{ width: '2000px', height: '800px' }}>
-                            <Tree2
+                        <div style={containerStyles} ref={containerRef}>
+                            <Tree
                                 data={graph}
-                                depthFactor={400}
-                                nodeSize={ { x: 10, y: 70 }}
-
-                        />;
+                                translate={translate}
+                                nodeSize={nodeSize}
+                                renderCustomNodeElement={(rd3tProps) =>
+                                    renderForeignObjectNode({ ...rd3tProps, foreignObjectProps })
+                                }
+                                orientation="vertical"
+                            />
                         </div>
                     );
                 }
