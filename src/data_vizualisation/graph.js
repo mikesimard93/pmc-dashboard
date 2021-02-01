@@ -329,7 +329,7 @@ function Graph(props) {
                 <div style={{ border: "1px solid black", backgroundColor: "#dedede" }}>
                     {(function () {
                         // !dataLoaded
-                        if (nodeDatum.attributes.Time > 1) {
+                        if (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5) {
                             return <Typography variant="h6" color="error">À SURVEILLER</Typography>
                         } else {
                             return <Typography variant="h5" color="success">OK</Typography>
