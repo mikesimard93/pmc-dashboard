@@ -350,7 +350,7 @@ function Graph(props) {
                     })()}
                     <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
                     <p style={{ textAlign: "center" }}>{nodeDatum.attributes.Time}</p>
-                    Dûe le <h3 style={{ textAlign: "center" }}>{nodeDatum.attributes.Due}</h3>
+                    Dû le <h3 style={{ textAlign: "center" }}>{nodeDatum.attributes.Due}</h3>
                     {nodeDatum.children && (
                         <button style={{ width: "100%" }} onClick={toggleNode}>
                             {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}
