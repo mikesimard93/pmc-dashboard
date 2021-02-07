@@ -97,7 +97,7 @@ function Graph(props) {
 
     const containerStyles = {
         width: "100vw",
-        height: "100vh"
+        height: "800px"
     };
 
     const useCenteredTree = (defaultTranslate = { x: 0, y: 0 }) => {
