@@ -252,16 +252,21 @@ function Graph(props) {
 
     function keepMilestoneOnly(obj) {
         return new Promise(async resolve => {
-            
+            obj.attributes.Time = obj.attributes.Time.toFixed(2)
+            console.log(obj.name)
+            var remove_list = []
             for (var i = 0; i < obj.children.length; i++) {
                 if (obj.children[i].type !== "milestone") {
                     delete obj.children[i]
-                    obj.children.length -= 1
                 }
                 else {
                     await keepMilestoneOnly(obj.children[i])
                 }
             }
+            const result = obj.children.filter(child => child !== undefined)
+            obj.children = result
+            console.log(result)
+            
 
             if (obj.children.length == 0) {
                 delete obj.children
@@ -302,6 +307,7 @@ function Graph(props) {
             Ratio: 0,
             Time: 0,
         }
+        tree.completed_at = null
         tree.due_on = top_task.due_on
         await recursive(dependencies, tree)
         console.log(tree)
@@ -329,9 +335,13 @@ function Graph(props) {
                 <div style={{ border: "1px solid black", backgroundColor: "#dedede" }}>
                     {(function () {
                         // !dataLoaded
-                        if (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5) {
+                        if (nodeDatum.completed_at !== null) {
+                            return <Typography variant="h6" color="success">COMPLÉTÉ</Typography>
+                        }
+                        else if (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5) {
                             return <Typography variant="h6" color="error">À SURVEILLER</Typography>
-                        } else {
+                        } 
+                        else {
                             return <Typography variant="h5" color="success">OK</Typography>
                         }
                     })()}
