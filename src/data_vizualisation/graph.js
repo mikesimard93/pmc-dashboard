@@ -336,9 +336,9 @@ function Graph(props) {
                     {(function () {
                         // !dataLoaded
                         if (nodeDatum.completed_at !== null) {
-                            return <Typography variant="h6" color="success">COMPLÉTÉ</Typography>
+                            return <Typography variant="h6" color="primary">COMPLÉTÉ</Typography>
                         }
-                        else if (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5) {
+                        else if (nodeDatum.completed_at == null && (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5)) {
                             return <Typography variant="h6" color="error">À SURVEILLER</Typography>
                         } 
                         else {

@@ -6,6 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import React from "react";
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { orange } from '@material-ui/core/colors';
+import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
 
 // Introduction Components
 import Members from './data_vizualisation/hours_members'
@@ -47,8 +51,13 @@ pastDate = yesterday.getDate() - 1;
 yesterday.setDate(pastDate);
 
 
-
-
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: green[500],
+        },
+    },
+});
 
 function App() {
 
@@ -349,6 +358,8 @@ function App() {
 
 
     return (
+
+        <ThemeProvider theme={theme}>
         <div className="App">
             <Grid container direction={'row'}>
                 <Box >
@@ -489,6 +500,7 @@ function App() {
                 Tableau généré le {today}
             </Box>
         </div>
+        </ThemeProvider>
     );
 }
 
