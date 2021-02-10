@@ -348,9 +348,23 @@ function Graph(props) {
                             return <Typography variant="h5" color="success">OK</Typography>
                         }
                     })()}
+
                     <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
-                    <h1 style={{ textAlign: "center" }}>{nodeDatum.attributes.Time}</h1>
-                    Dû le <h3 style={{ textAlign: "center" }}>{nodeDatum.attributes.Due}</h3>
+
+                    {(function () {
+                        // !dataLoaded
+                        if (nodeDatum.completed_at == null) {
+                            return <h1 style={{ textAlign: "center" }}>{nodeDatum.attributes.Time}</h1>
+                        }
+                    })()}
+
+                    {(function () {
+                        // !dataLoaded
+                        if (nodeDatum.completed_at == null) {
+                            return <h3 style={{ textAlign: "center" }}>Dû le {nodeDatum.attributes.Due}</h3>
+                        }
+                    })()}
+
                     {nodeDatum.children && (
                         <button style={{ width: "100%" }} onClick={toggleNode}>
                             {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}

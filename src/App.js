@@ -430,6 +430,21 @@ function App() {
                     </Grid>
 
 
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Box mt={0}>
+                            <Paper elevation={4}>
+                                <Box p={2}>
+                                    <Typography variant="h5" component="h2">
+                                        Arbre des jalons
+                                    </Typography>
+                                </Box>
+                                <Box p={2}>
+                                    <Graph fromChildToParentCallback={updateRatio}></Graph>
+                                </Box>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>
                             <Paper elevation={4}>
@@ -467,28 +482,11 @@ function App() {
                                     </Typography>
                                     <Members data={hoursPerMember} loading={hoursPerMemberLoading}></Members>
                                 </Box>
-
-                            </Paper>
-                        </Box>
-                    </Grid>
-
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <Box mt={0}>
-                            <Paper elevation={4}>
-                                <Box p={2}>
-                                    <Typography variant="h5" component="h2">
-                                        Arbre des jalons
-                                    </Typography>
-                                </Box>
-                                <Box p={2}>
-                                    <Graph fromChildToParentCallback={updateRatio}></Graph>
-                                </Box>
                             </Paper>
                         </Box>
                     </Grid>
 
                 </Grid>
-
             </Box>
             <Box p={2}>
                 Tableau généré le {today}
