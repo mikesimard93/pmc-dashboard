@@ -7,13 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import React from "react";
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { orange } from '@material-ui/core/colors';
-import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 
 // Introduction Components
 import Members from './data_vizualisation/hours_members'
 import Intro from './data_vizualisation/intro'
+import Legend from './data_vizualisation/legend'
 import ToWatch from './data_vizualisation/to_watch'
 
 // KPIs Components
@@ -409,20 +408,6 @@ function App() {
                         </Box>
                     </Grid>
 
-
-                    <Grid item xs={12} sm={12} md={3} lg={3}>
-                        <Box  m={0}>
-                            <Paper elevation={4}>
-                                <Box p={2}>
-                                    <Typography variant="h5" component="h2">
-                                        Ratio
-                                    </Typography>
-                                    <GaugePerformance data={gauge}></GaugePerformance>
-                                </Box>
-                            </Paper>
-                        </Box>
-                    </Grid>
-
                     <Grid item xs={12} sm={12} md={3} lg={3}>
                         <Box  m={0}>
                             <Paper elevation={4}>
@@ -435,6 +420,15 @@ function App() {
                             </Paper>
                         </Box>
                     </Grid>
+
+                    <Grid item xs={12} sm={12} md={3} lg={3}>
+                        <Box  m={0}>
+                            <Paper elevation={4}>
+                                    <Legend></Legend>
+                            </Paper>
+                        </Box>
+                    </Grid>
+
 
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>
@@ -464,7 +458,7 @@ function App() {
                         </Box>
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Box mt={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
