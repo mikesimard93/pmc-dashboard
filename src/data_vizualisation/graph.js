@@ -112,7 +112,7 @@ function Graph(props) {
     };
 
     const [translate, containerRef] = useCenteredTree();
-    const nodeSize = { x: 200, y: 200 };
+    const nodeSize = { x: 275, y: 300 };
     const foreignObjectProps = { width: nodeSize.x, height: nodeSize.y, x: 20 };
 
 
@@ -163,6 +163,7 @@ function Graph(props) {
                 attributes: {
                     Ratio: 0,
                     Time: 0,
+                    Due: "",
                 },
                 nodeSvgShape: {
                     shape: 'circle',
@@ -243,6 +244,7 @@ function Graph(props) {
 
             console.log(ratioRounded)
             obj.attributes.Time = ratioRounded/(temp)
+            obj.attributes.Due = obj.due_on
             console.log(obj.attributes.Time)
 
 
@@ -306,6 +308,7 @@ function Graph(props) {
         tree.attributes = {
             Ratio: 0,
             Time: 0,
+            Due: "",
         }
         tree.completed_at = null
         tree.due_on = top_task.due_on
@@ -336,17 +339,32 @@ function Graph(props) {
                     {(function () {
                         // !dataLoaded
                         if (nodeDatum.completed_at !== null) {
-                            return <Typography variant="h6" color="success">COMPLÉTÉ</Typography>
+                            return <Typography variant="h6" color="primary">COMPLÉTÉ</Typography>
                         }
-                        else if (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5) {
+                        else if (nodeDatum.completed_at == null && (nodeDatum.attributes.Time < 0.5 || nodeDatum.attributes.Time >1.5)) {
                             return <Typography variant="h6" color="error">À SURVEILLER</Typography>
                         } 
                         else {
                             return <Typography variant="h5" color="success">OK</Typography>
                         }
                     })()}
+
                     <h3 style={{ textAlign: "center" }}>{nodeDatum.name}</h3>
-                    <p style={{ textAlign: "center" }}>{nodeDatum.attributes.Time}</p>
+
+                    {(function () {
+                        // !dataLoaded
+                        if (nodeDatum.completed_at == null) {
+                            return <h1 style={{ textAlign: "center" }}>{nodeDatum.attributes.Time}</h1>
+                        }
+                    })()}
+
+                    {(function () {
+                        // !dataLoaded
+                        if (nodeDatum.completed_at == null) {
+                            return <h3 style={{ textAlign: "center" }}>Dû le {nodeDatum.attributes.Due}</h3>
+                        }
+                    })()}
+
                     {nodeDatum.children && (
                         <button style={{ width: "100%" }} onClick={toggleNode}>
                             {nodeDatum.__rd3t.collapsed ? "Expand" : "Collapse"}

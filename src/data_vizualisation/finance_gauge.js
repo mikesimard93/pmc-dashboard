@@ -31,8 +31,8 @@ export default function OutlinedCard(props) {
     return (
         <BarGauge
             id="gauge"
-            startValue={-10000}
-            endValue={10000}
+            startValue={-25000}
+            endValue={25000}
             baseValue={0}
             values={values}
             palette="Ocean"
