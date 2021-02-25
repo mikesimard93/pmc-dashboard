@@ -18,7 +18,7 @@ import FinancesGauge from './data_vizualisation/finance_gauge'
 import PieChartHoursModules from './data_vizualisation/pie_chart_modules_hours'
 
 // Graph Tree
-import Graph from './data_vizualisation/graph'
+// import Graph from './data_vizualisation/graph'
 
 
 // Pie Charts creation
@@ -115,57 +115,57 @@ function App() {
         name: 'Admin',
         area: 0
     }, {
-        name: 'Contrôle',
-        area: 0
-    }, {
-        name: 'Chassis',
-        area: 0
-    }, {
-        name: 'Puissance',
-        area: 0
-    }, {
         name: 'Bras',
-        area: 0
-    }, {
-        name: 'Suspension',
         area: 0
     }, {
         name: 'Propulsion',
         area: 0
     }, {
-        name: 'Intégration',
+        name: 'Suspension',
+        area: 0
+    }, {
+        name: 'Contrôle',
+        area: 0
+    }, {
+        name: 'Puissance',
+        area: 0
+    }, {
+        name: 'Châssis',
+        area: 0
+    }, {
+        name: 'Connect 4',
         area: 0
     }, {
         name: 'Science',
         area: 0
     }, {
-        name: 'Connect 4',
+        name: 'Intégration',
         area: 0
     }];
 
     let types = [{
-        name: 'Rencontre',
+        name: 'Fabrication & Test',
         area: 0
     },{
         name: 'Conception',
         area: 0
     },{
+        name: 'Rencontre',
+        area: 0
+    }, {
         name: 'Gestion',
         area: 0
     }, {
-        name: 'Fabrication & Test',
+        name: 'Activité pédagogique',
         area: 0
     }, {
-        name: 'Activité pédagogique',
+        name: 'Travail COROM',
         area: 0
     }, {
         name: 'Présentation',
         area: 0
     }, {
         name: 'Rédaction',
-        area: 0
-    }, {
-        name: 'Travail COROM',
         area: 0
     }, {
         name: 'Autre (expliquez)',
@@ -178,10 +178,14 @@ function App() {
 
     function getTask(task_gid) {
         return new Promise(async resolve => {
-            client.tasks.getTask(task_gid)
-                .then((result) => {
-                    resolve(result);
-                });
+            if (task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
+                console.log(task_gid)
+                client.tasks.getTask(task_gid)
+                    .then((result) => {
+                        resolve(result);
+                    });
+            }
+            else {resolve([]);}
         })
     }
     function getInfoTask() {
@@ -268,7 +272,7 @@ function App() {
                         }
                     }
                 }
-                catch(err) {
+                catch(err) { console.log("pass")
                 }
 
             }
@@ -321,12 +325,12 @@ function App() {
             }
         }
         console.log(entry_list_week)
-        get_hours(entry_list_week, "actuel", weekAgo, yesterday)
+        get_hours(entry_list_session, "actuel", weekAgo, yesterday)
         get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
         updateHoursPerMember(grossProductData)
         updateHoursPerMemberLoading(false)
 
-        const array = await pie_chart(entry_list_week)
+        const array = await pie_chart(entry_list_session)
         await formatData()
         updateHoursPerModule(modules)
         updateHoursPerModuleLoading(false)
@@ -467,7 +471,7 @@ function App() {
                         </Box>
                     </Grid>
 
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Box mt={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
@@ -480,7 +484,7 @@ function App() {
                                 </Box>
                             </Paper>
                         </Box>
-                    </Grid>
+                    </Grid> */}
 
                 </Grid>
 
