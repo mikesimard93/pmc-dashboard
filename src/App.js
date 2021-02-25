@@ -21,7 +21,7 @@ import FinancesGauge from './data_vizualisation/finance_gauge'
 import PieChartHoursModules from './data_vizualisation/pie_chart_modules_hours'
 
 // Graph Tree
-// import Graph from './data_vizualisation/graph'
+import Graph from './data_vizualisation/graph'
 
 
 // Pie Charts creation
@@ -434,7 +434,7 @@ function App() {
                     </Grid>
 
 
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
+                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Box mt={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
@@ -447,7 +447,7 @@ function App() {
                                 </Box>
                             </Paper>
                         </Box>
-                    </Grid>
+                    </Grid> */}
 
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>
@@ -486,28 +486,9 @@ function App() {
                                     </Typography>
                                     <Members data={hoursPerMember} loading={hoursPerMemberLoading}></Members>
                                 </Box>
-<<<<<<< HEAD
-
                             </Paper>
                         </Box>
                     </Grid>
-
-                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
-                        <Box mt={0}>
-                            <Paper elevation={4}>
-                                <Box p={2}>
-                                    <Typography variant="h5" component="h2">
-                                        Arbre des jalons
-                                    </Typography>
-                                </Box>
-                                <Box p={2}>
-                                    <Graph fromChildToParentCallback={updateRatio}></Graph>
-                                </Box>
-=======
->>>>>>> 9013b4c0ed10aebdefb048b1f3dcf535543b7558
-                            </Paper>
-                        </Box>
-                    </Grid> */}
 
                 </Grid>
             </Box>
