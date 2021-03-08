@@ -34,9 +34,10 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 8;
-weekAgo.setDate(pastDate);
+var pastDate = weekAgo.getDate() - 15;
 
+weekAgo.setDate(pastDate);
+console.log(weekAgo)
 var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -245,7 +246,7 @@ function App() {
         }
 
         for (var j = 0; j < grossProductData.length; j++) {
-            grossProductData[j].moyenne /= week
+            grossProductData[j].moyenne /= (week-1) // pour la semaine de relache
         }
 
     }
@@ -325,20 +326,24 @@ function App() {
             var month = parts[1]
             var day = parts[2]
             var entry_date = new Date(year, month-1, day)
-            if (entry_date > weekAgo  && entry_date < yesterday && entries[i].external_reference.id !== '1199598736876796') {
-                entry_list_week.push(entries[i])
+            try {
+                if (entry_date > weekAgo  && entry_date < yesterday && entries[i].external_reference.id !== '1199598736876796') {
+                    entry_list_week.push(entries[i])
+                }
+                if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
+                    entry_list_session.push(entries[i])
+                }
             }
-            if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
-                entry_list_session.push(entries[i])
-            }
+            catch(err){}
+            
         }
         console.log(entry_list_week)
-        get_hours(entry_list_session, "actuel", weekAgo, yesterday)
+        get_hours(entry_list_week, "actuel", weekAgo, yesterday)
         get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
         updateHoursPerMember(grossProductData)
         updateHoursPerMemberLoading(false)
 
-        const array = await pie_chart(entry_list_session)
+        const array = await pie_chart(entry_list_week)
         await formatData()
         updateHoursPerModule(modules)
         updateHoursPerModuleLoading(false)
@@ -434,7 +439,7 @@ function App() {
                     </Grid>
 
 
-                    {/* <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Grid item xs={12} sm={12} md={12} lg={12}>
                         <Box mt={0}>
                             <Paper elevation={4}>
                                 <Box p={2}>
@@ -447,7 +452,7 @@ function App() {
                                 </Box>
                             </Paper>
                         </Box>
-                    </Grid> */}
+                    </Grid>
 
                     <Grid item xs={12} sm={12} md={6} lg={6}>
                         <Box m={0}>

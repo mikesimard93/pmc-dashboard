@@ -238,13 +238,16 @@ function Graph(props) {
 
             var temp = (todayTime - startTime)/(dueTime - startTime)
 
-
-            var ratio = obj.clocked_time/(temp * obj.total_dependencies_time)
+            console.log(temp)
+            console.log(obj.total_dependencies_time)
+            console.log(obj.clocked_time)
+            var ratio = obj.clocked_time/(temp * obj.total_dependencies_time + + Number.EPSILON)
             var ratioRounded = Math.round((ratio + Number.EPSILON) * 100) / 100
 
-            console.log(ratioRounded)
+            console.log(ratio)
             obj.attributes.Time = ratioRounded/(temp)
             obj.attributes.Due = obj.due_on
+            console.log(obj.name)
             console.log(obj.attributes.Time)
 
 
@@ -254,25 +257,29 @@ function Graph(props) {
 
     function keepMilestoneOnly(obj) {
         return new Promise(async resolve => {
+            console.log(obj)
             obj.attributes.Time = obj.attributes.Time.toFixed(2)
             console.log(obj.name)
             var remove_list = []
-            for (var i = 0; i < obj.children.length; i++) {
-                if (obj.children[i].type !== "milestone") {
-                    delete obj.children[i]
+            try {
+                for (var i = 0; i < obj.children.length; i++) {
+                    if (obj.children[i].type !== "milestone") {
+                        delete obj.children[i]
+                    }
+                    else {
+                        await keepMilestoneOnly(obj.children[i])
+                    }
                 }
-                else {
-                    await keepMilestoneOnly(obj.children[i])
+                const result = obj.children.filter(child => child !== undefined)
+                obj.children = result
+                console.log(result)
+                
+                if (obj.children.length == 0) {
+                    delete obj.children
                 }
             }
-            const result = obj.children.filter(child => child !== undefined)
-            obj.children = result
-            console.log(result)
+            catch(err){}
             
-
-            if (obj.children.length == 0) {
-                delete obj.children
-            }
             resolve(obj);
         });
     }
@@ -286,9 +293,13 @@ function Graph(props) {
             var month = parts[1]
             var day = parts[2]
             var entry_date = new Date(year, month-1, day)
-            if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
+            try {
+                if (entry_date > startSessionDate && entries[i].external_reference.id !== '1199598736876796') {
                 entry_list_session.push(entries[i])
+                }
             }
+            catch(err){}
+            
         }
         for (var i = 0; i < milestones.data.length; i++) {
             const task = await getTask(milestones.data[i].gid);
