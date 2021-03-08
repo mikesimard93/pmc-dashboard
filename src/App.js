@@ -131,7 +131,7 @@ function App() {
         area: 0
     }, {
         name: 'Suspension',
-        area: 0
+        area: 12
     }, {
         name: 'Contrôle',
         area: 0
