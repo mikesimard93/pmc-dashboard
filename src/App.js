@@ -34,7 +34,7 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 15;
+var pastDate = weekAgo.getDate() - 8;
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
@@ -131,7 +131,7 @@ function App() {
         area: 0
     }, {
         name: 'Suspension',
-        area: 12
+        area: 0
     }, {
         name: 'Contrôle',
         area: 0
@@ -244,9 +244,11 @@ function App() {
                 }
             }
         }
-
-        for (var j = 0; j < grossProductData.length; j++) {
-            grossProductData[j].moyenne /= (week-1) // pour la semaine de relache
+        console.log(grossProductData)
+        if (type === "moyenne") {
+            for (var j = 0; j < grossProductData.length; j++) {
+                        grossProductData[j].moyenne /= (week-1) // pour la semaine de relache
+            }
         }
 
     }
