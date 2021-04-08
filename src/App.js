@@ -34,12 +34,15 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 8;
+var pastDate = weekAgo.getDate() - 11;
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
 var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
 var today = new Date();
+var pastToday = today.getDate() - 3;
+today.setDate(pastToday);
+console.log(today)
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
