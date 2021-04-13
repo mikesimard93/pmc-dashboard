@@ -343,10 +343,10 @@ function App() {
             
         }
         console.log(entry_list_week)
-        // get_hours(entry_list_session, "actuel", startSessionDate, yesterday)
-        // get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
-        // updateHoursPerMember(grossProductData)
-        // updateHoursPerMemberLoading(false)
+        get_hours(entry_list_session, "actuel", startSessionDate, yesterday)
+        get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
+        updateHoursPerMember(grossProductData)
+        updateHoursPerMemberLoading(false)
 
         const array = await pie_chart(entry_list_session)
         await formatData()
