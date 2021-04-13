@@ -34,13 +34,13 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 11;
+var pastDate = weekAgo.getDate() - 8;
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
 var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
 var today = new Date();
-var pastToday = today.getDate() - 3;
+var pastToday = today.getDate() -1;
 today.setDate(pastToday);
 console.log(today)
 var dd = String(today.getDate()).padStart(2, '0');
@@ -190,7 +190,7 @@ function App() {
 
     function getTask(task_gid) {
         return new Promise(async resolve => {
-            if (task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
+            if (task_gid !== "1200089123421786" && task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
                 console.log(task_gid)
                 client.tasks.getTask(task_gid)
                     .then((result) => {
@@ -343,12 +343,12 @@ function App() {
             
         }
         console.log(entry_list_week)
-        get_hours(entry_list_week, "actuel", weekAgo, yesterday)
-        get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
-        updateHoursPerMember(grossProductData)
-        updateHoursPerMemberLoading(false)
+        // get_hours(entry_list_session, "actuel", startSessionDate, yesterday)
+        // get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
+        // updateHoursPerMember(grossProductData)
+        // updateHoursPerMemberLoading(false)
 
-        const array = await pie_chart(entry_list_week)
+        const array = await pie_chart(entry_list_session)
         await formatData()
         updateHoursPerModule(modules)
         updateHoursPerModuleLoading(false)
