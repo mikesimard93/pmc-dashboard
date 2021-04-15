@@ -190,7 +190,7 @@ function App() {
 
     function getTask(task_gid) {
         return new Promise(async resolve => {
-            if (task_gid !== "1200089123421786" && task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
+            if (task_gid !== "1200124598652249" && task_gid !== "1200089123421786" && task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
                 console.log(task_gid)
                 client.tasks.getTask(task_gid)
                     .then((result) => {
