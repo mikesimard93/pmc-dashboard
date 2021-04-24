@@ -130,10 +130,10 @@ function App() {
         name: 'Bras',
         area: 0
     }, {
-        name: 'Propulsion',
+        name: 'Suspension',
         area: 0
     }, {
-        name: 'Suspension',
+        name: 'Propulsion',
         area: 0
     }, {
         name: 'Contrôle',
@@ -145,10 +145,10 @@ function App() {
         name: 'Châssis',
         area: 0
     }, {
-        name: 'Connect 4',
+        name: 'Science',
         area: 0
     }, {
-        name: 'Science',
+        name: 'Connect 4',
         area: 0
     }, {
         name: 'Intégration',
@@ -156,28 +156,28 @@ function App() {
     }];
 
     let types = [{
-        name: 'Fabrication & Test',
-        area: 0
-    },{
         name: 'Conception',
         area: 0
     },{
-        name: 'Rencontre',
+        name: 'Fabrication & Test',
+        area: 0
+    },{
+        name: 'Présentation',
         area: 0
     }, {
-        name: 'Gestion',
+        name: 'Rencontre',
         area: 0
     }, {
         name: 'Activité pédagogique',
         area: 0
     }, {
-        name: 'Travail COROM',
-        area: 0
-    }, {
-        name: 'Présentation',
+        name: 'Gestion',
         area: 0
     }, {
         name: 'Rédaction',
+        area: 0
+    }, {
+        name: 'Travail COROM',
         area: 0
     }, {
         name: 'Autre (expliquez)',
