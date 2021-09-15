@@ -34,11 +34,11 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 8;
+var pastDate = weekAgo.getDate() - 9;
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
-var startSessionDate = new Date(2021, 8, 3, 0, 0, 0, 0);
+var startSessionDate = new Date(2021, 7, 30, 0, 0, 0, 0);
 var today = new Date();
 var pastToday = today.getDate() -1;
 today.setDate(pastToday);
@@ -50,7 +50,7 @@ today = dd + '/' + mm + '/' + yyyy;
 
 
 var yesterday = new Date();
-pastDate = yesterday.getDate() - 1;
+pastDate = yesterday.getDate() - 2;
 yesterday.setDate(pastDate);
 
 
@@ -232,6 +232,7 @@ function App() {
         var diff =(today.getTime() - session_date.getTime()) / 1000;
         diff /= (60 * 60 * 24 * 7);
         var week = Math.abs(Math.round(diff));
+        console.log(week)
 
         for (var i = 0; i < entry_list.length; i++) {
             for (var j = 0; j < grossProductData.length; j++) {
@@ -343,7 +344,7 @@ function App() {
             
         }
         console.log(entry_list_week)
-        get_hours(entry_list_session, "actuel", startSessionDate, yesterday)
+        get_hours(entry_list_week, "actuel", startSessionDate, yesterday)
         get_hours(entry_list_session, "moyenne", startSessionDate, yesterday)
         updateHoursPerMember(grossProductData)
         updateHoursPerMemberLoading(false)
