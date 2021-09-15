@@ -38,7 +38,7 @@ var pastDate = weekAgo.getDate() - 8;
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
-var startSessionDate = new Date(2021, 0, 10, 0, 0, 0, 0);
+var startSessionDate = new Date(2021, 8, 3, 0, 0, 0, 0);
 var today = new Date();
 var pastToday = today.getDate() -1;
 today.setDate(pastToday);
@@ -250,7 +250,7 @@ function App() {
         console.log(grossProductData)
         if (type === "moyenne") {
             for (var j = 0; j < grossProductData.length; j++) {
-                        grossProductData[j].moyenne /= (week-1) // pour la semaine de relache
+                        grossProductData[j].moyenne /= (week) // pour la semaine de relache
             }
         }
 
