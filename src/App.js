@@ -34,13 +34,13 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - 9;
+var pastDate = weekAgo.getDate() - 8;
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
 var startSessionDate = new Date(2021, 7, 30, 0, 0, 0, 0);
 var today = new Date();
-var pastToday = today.getDate() -1;
+var pastToday = today.getDate();
 today.setDate(pastToday);
 console.log(today)
 var dd = String(today.getDate()).padStart(2, '0');
@@ -50,7 +50,7 @@ today = dd + '/' + mm + '/' + yyyy;
 
 
 var yesterday = new Date();
-pastDate = yesterday.getDate() - 2;
+pastDate = yesterday.getDate() - 1;
 yesterday.setDate(pastDate);
 
 
