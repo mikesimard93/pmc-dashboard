@@ -156,6 +156,8 @@ function Graph(props) {
     function fillObject(obj, task) {
         return new Promise(resolve => {
             const new_key = task.name
+            console.log(task.gid)
+            console.log(task.name)
             obj.children.push( {
                 gProps: {
                     className: 'red-node'
