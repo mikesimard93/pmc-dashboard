@@ -34,7 +34,7 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - (8+7);
+var pastDate = weekAgo.getDate() - (8);
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
