@@ -34,7 +34,7 @@ const app_name = 'PMC dashboard'
 const harvest = new Harvest(account_id, token, app_name)
 
 var weekAgo = new Date();
-var pastDate = weekAgo.getDate() - (8);
+var pastDate = weekAgo.getDate() - (7); 
 
 weekAgo.setDate(pastDate);
 console.log(weekAgo)
@@ -50,7 +50,7 @@ today = dd + '/' + mm + '/' + yyyy;
 
 
 var yesterday = new Date();
-pastDate = yesterday.getDate() - 1;
+pastDate = yesterday.getDate(); // change here for closest date
 yesterday.setDate(pastDate);
 
 
@@ -190,7 +190,7 @@ function App() {
 
     function getTask(task_gid) {
         return new Promise(async resolve => {
-            if (task_gid !== "1200124598652249" && task_gid !== "1200089123421786" && task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
+            if (task_gid !== "1201355110642389" && task_gid !== "1200124598652249" && task_gid !== "1200089123421786" && task_gid !== "1199578972033038" && task_gid !== "1199594899825045" && task_gid !== "1199689394413937" && task_gid !== "1199964978561960" && task_gid !== "1199930149216598" && task_gid !== "1199921124082369" && task_gid !== "1199594899825042" && task_gid !== "1199906081843675" && task_gid !== "1199906081843657" && task_gid !== "1199658370254877") {
                 console.log(task_gid)
                 client.tasks.getTask(task_gid)
                     .then((result) => {
